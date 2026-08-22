@@ -191,7 +191,7 @@
             58%, 100% { transform: rotate(calc(var(--s, 1) * 1turn)); }
         }
 
-        /* ===== GLITCH OVERLAY (réparé) ===== */
+        /* ===== GLITCH OVERLAY (renforcé) ===== */
         .glitch-overlay {
             position: fixed;
             inset: 0;
@@ -201,21 +201,22 @@
             transition: opacity 0.1s;
         }
         .glitch-overlay.active {
-            animation: glitchFlash 1.2s ease-in-out forwards;
+            animation: glitchFlash 1.6s ease-in-out forwards;
         }
         @keyframes glitchFlash {
             0% { opacity: 0; }
-            5% { opacity: 1; transform: translate(3px, -3px) skewX(-2deg); clip-path: inset(10% 0 70% 0); background: rgba(0, 212, 255, 0.05); }
-            8% { opacity: 0; transform: translate(-3px, 4px) skewX(1deg); clip-path: inset(40% 0 30% 0); }
-            12% { opacity: 1; transform: translate(5px, -2px) skewX(-1deg); clip-path: inset(5% 0 85% 0); background: rgba(124, 58, 237, 0.05); }
-            16% { opacity: 0; transform: translate(-5px, 3px); }
-            22% { opacity: 1; transform: translate(2px, -4px) skewX(2deg); clip-path: inset(60% 0 15% 0); background: rgba(0, 212, 255, 0.03); }
-            28% { opacity: 0; transform: translate(-2px, 2px); }
-            35% { opacity: 1; transform: translate(4px, -2px); clip-path: inset(25% 0 55% 0); background: rgba(79, 70, 229, 0.04); }
-            42% { opacity: 0; transform: translate(-4px, 2px); }
-            50% { opacity: 1; transform: translate(1px, -1px); clip-path: inset(0% 0 0% 0); background: transparent; }
-            60% { opacity: 0; transform: translate(-1px, 1px); }
-            70% { opacity: 1; transform: translate(0px, 0px); clip-path: inset(0% 0 0% 0); background: transparent; }
+            3% { opacity: 1; transform: translate(6px, -5px) skewX(-3deg) scale(1.01); clip-path: inset(5% 0 80% 0); background: rgba(0, 212, 255, 0.15); }
+            6% { opacity: 0; transform: translate(-8px, 6px) skewX(2deg) scale(0.99); clip-path: inset(30% 0 50% 0); }
+            10% { opacity: 1; transform: translate(10px, -4px) skewX(-2deg) scale(1.02); clip-path: inset(2% 0 90% 0); background: rgba(124, 58, 237, 0.18); }
+            14% { opacity: 0; transform: translate(-10px, 5px) scale(1.01); clip-path: inset(60% 0 20% 0); }
+            18% { opacity: 1; transform: translate(4px, -8px) skewX(3deg) scale(0.98); clip-path: inset(45% 0 35% 0); background: rgba(0, 212, 255, 0.12); }
+            22% { opacity: 0; transform: translate(-5px, 4px) scale(1.02); clip-path: inset(10% 0 70% 0); }
+            27% { opacity: 1; transform: translate(8px, -3px) skewX(-4deg) scale(1.01); clip-path: inset(70% 0 5% 0); background: rgba(79, 70, 229, 0.15); }
+            32% { opacity: 0; transform: translate(-8px, 3px) scale(0.99); clip-path: inset(20% 0 60% 0); }
+            38% { opacity: 1; transform: translate(3px, -6px) skewX(2deg) scale(1.02); clip-path: inset(0% 0 0% 0); background: rgba(0, 212, 255, 0.08); }
+            44% { opacity: 0; transform: translate(-3px, 6px) scale(1.01); clip-path: inset(50% 0 30% 0); }
+            50% { opacity: 1; transform: translate(0px, 0px) scale(1); clip-path: inset(0% 0 0% 0); background: transparent; }
+            58% { opacity: 0; transform: translate(0px, 0px) scale(1); clip-path: inset(0% 0 0% 0); }
             100% { opacity: 0; }
         }
 
@@ -492,10 +493,10 @@
             margin: 0 auto;
         }
 
-        /* ---- CADRE PHOTO (ANNEAUX RAPPROCHÉS) ---- */
+        /* ---- CADRE PHOTO (ANNEAUX RESSERRÉS) ---- */
         .photo-frame {
-            width: 420px;
-            height: 420px;
+            width: 400px;
+            height: 400px;
             position: relative;
             display: grid;
             place-items: center;
@@ -509,10 +510,10 @@
             -webkit-mask:
                 radial-gradient(farthest-side, transparent calc(100% - 10px), #000 calc(100% - 9px));
         }
-        /* Grand anneau : 380px / Petit anneau : 330px (rapprochés) */
+        /* Grand anneau : 310px / Petit anneau : 270px (très resserrés) */
         .ring-large {
-            width: 380px;
-            height: 380px;
+            width: 310px;
+            height: 310px;
             background:
                 conic-gradient(from 0deg,
                     #3730A3 0deg 100deg,
@@ -524,8 +525,8 @@
             animation: rotate-large 18s ease-in-out infinite alternate;
         }
         .ring-small {
-            width: 330px;
-            height: 330px;
+            width: 270px;
+            height: 270px;
             background:
                 conic-gradient(from 45deg,
                     #06B6D4 0deg 90deg,
@@ -1161,8 +1162,8 @@
             .hero-name-scramble { min-width: unset; width: 100%; text-align: center; }
             .footer-copyright-wrapper { left: 16px; font-size: 0.6rem; }
             .photo-frame { width: 320px; height: 320px; }
-            .ring-large { width: 290px; height: 290px; }
-            .ring-small { width: 250px; height: 250px; }
+            .ring-large { width: 250px; height: 250px; }
+            .ring-small { width: 220px; height: 220px; }
             .profile-photo { width: 170px; height: 170px; }
         }
         @media (max-width: 768px) {
@@ -1173,8 +1174,8 @@
             .navbar-avatar { width: 34px; height: 34px; }
             .mobile-menu { top: 56px; }
             .photo-frame { width: 280px; height: 280px; }
-            .ring-large { width: 250px; height: 250px; }
-            .ring-small { width: 220px; height: 220px; }
+            .ring-large { width: 215px; height: 215px; }
+            .ring-small { width: 185px; height: 185px; }
             .profile-photo { width: 150px; height: 150px; }
             .section { padding: 80px 16px 40px; }
             .contact-grid { grid-template-columns: 1fr; }
@@ -1190,8 +1191,8 @@
         }
         @media (max-width: 480px) {
             .photo-frame { width: 240px; height: 240px; }
-            .ring-large { width: 215px; height: 215px; }
-            .ring-small { width: 185px; height: 185px; }
+            .ring-large { width: 185px; height: 185px; }
+            .ring-small { width: 160px; height: 160px; }
             .profile-photo { width: 130px; height: 130px; }
             .hero-title { font-size: 1.6rem; }
             .btn { padding: 10px 18px; font-size: 0.85rem; }
@@ -1213,7 +1214,7 @@
         </div>
     </div>
 
-    <!-- GLITCH OVERLAY (réparé) -->
+    <!-- GLITCH OVERLAY (renforcé) -->
     <div class="glitch-overlay"></div>
 
     <!-- SCROLL PROGRESS -->
@@ -1260,7 +1261,7 @@
     <!-- HERO / ACCUEIL -->
     <section class="section visible" id="accueil" style="opacity:1; transform:none;">
         <div class="hero-container">
-            <!-- Cadre photo avec anneaux rapprochés -->
+            <!-- Cadre photo avec anneaux resserrés -->
             <div class="photo-frame">
                 <div class="ring ring-large"></div>
                 <div class="ring ring-small"></div>
@@ -1769,7 +1770,7 @@
                         // 3. Retirer la classe active après l'animation pour éviter les problèmes
                         setTimeout(() => {
                             glitchOverlay.classList.remove('active');
-                        }, 1500);
+                        }, 1800);
                     }, 500);
                 }
             }, 200);
@@ -1828,7 +1829,7 @@
                         }, loopDelay);
                     });
                 }
-                // Délai initial réduit à 800ms (au lieu de 1500ms)
+                // Délai initial réduit à 800ms
                 setTimeout(() => {
                     doOneCycle();
                 }, 800);
