@@ -152,23 +152,12 @@
             animation: preloaderSpin 3s linear infinite;
         }
         @keyframes preloaderSpin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         @keyframes preloaderPulse {
-            0%,
-            100% {
-                transform: scale(1);
-                box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
-            }
-            50% {
-                transform: scale(1.06);
-                box-shadow: 0 0 70px rgba(0, 212, 255, 0.8);
-            }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(0, 212, 255, 0.5); }
+            50% { transform: scale(1.06); box-shadow: 0 0 70px rgba(0, 212, 255, 0.8); }
         }
 
         /* ---- NOUVEAU LOADER ---- */
@@ -176,9 +165,7 @@
             height: 15px;
             aspect-ratio: 4;
             --_g: no-repeat radial-gradient(farthest-side, var(--accent-cyan) 90%, #0000);
-            background:
-                var(--_g) left,
-                var(--_g) right;
+            background: var(--_g) left, var(--_g) right;
             background-size: 25% 100%;
             display: grid;
             margin: 0 auto;
@@ -201,10 +188,35 @@
             animation-delay: -.5s;
         }
         @keyframes l49 {
-            58%,
-            100% {
-                transform: rotate(calc(var(--s, 1) * 1turn));
-            }
+            58%, 100% { transform: rotate(calc(var(--s, 1) * 1turn)); }
+        }
+
+        /* ===== GLITCH OVERLAY (réparé) ===== */
+        .glitch-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.1s;
+        }
+        .glitch-overlay.active {
+            animation: glitchFlash 1.2s ease-in-out forwards;
+        }
+        @keyframes glitchFlash {
+            0% { opacity: 0; }
+            5% { opacity: 1; transform: translate(3px, -3px) skewX(-2deg); clip-path: inset(10% 0 70% 0); background: rgba(0, 212, 255, 0.05); }
+            8% { opacity: 0; transform: translate(-3px, 4px) skewX(1deg); clip-path: inset(40% 0 30% 0); }
+            12% { opacity: 1; transform: translate(5px, -2px) skewX(-1deg); clip-path: inset(5% 0 85% 0); background: rgba(124, 58, 237, 0.05); }
+            16% { opacity: 0; transform: translate(-5px, 3px); }
+            22% { opacity: 1; transform: translate(2px, -4px) skewX(2deg); clip-path: inset(60% 0 15% 0); background: rgba(0, 212, 255, 0.03); }
+            28% { opacity: 0; transform: translate(-2px, 2px); }
+            35% { opacity: 1; transform: translate(4px, -2px); clip-path: inset(25% 0 55% 0); background: rgba(79, 70, 229, 0.04); }
+            42% { opacity: 0; transform: translate(-4px, 2px); }
+            50% { opacity: 1; transform: translate(1px, -1px); clip-path: inset(0% 0 0% 0); background: transparent; }
+            60% { opacity: 0; transform: translate(-1px, 1px); }
+            70% { opacity: 1; transform: translate(0px, 0px); clip-path: inset(0% 0 0% 0); background: transparent; }
+            100% { opacity: 0; }
         }
 
         /* ===== NAVBAR ===== */
@@ -334,15 +346,9 @@
             border-radius: 2px;
             transition: all var(--transition-base);
         }
-        .nav-toggle.open span:nth-child(1) {
-            transform: translateY(7px) rotate(45deg);
-        }
-        .nav-toggle.open span:nth-child(2) {
-            opacity: 0;
-        }
-        .nav-toggle.open span:nth-child(3) {
-            transform: translateY(-7px) rotate(-45deg);
-        }
+        .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .nav-toggle.open span:nth-child(2) { opacity: 0; }
+        .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
         .mobile-menu {
             display: none;
@@ -361,18 +367,10 @@
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
             animation: menuSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .mobile-menu.open {
-            display: flex;
-        }
+        .mobile-menu.open { display: flex; }
         @keyframes menuSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .mobile-menu .nav-link {
             padding: 12px 16px;
@@ -474,9 +472,7 @@
             box-shadow: var(--shadow-glow);
             transform: translateY(-2px);
         }
-        .glass-card:hover::before {
-            opacity: 1;
-        }
+        .glass-card:hover::before { opacity: 1; }
 
         /* ===== HERO ===== */
         #accueil {
@@ -496,10 +492,10 @@
             margin: 0 auto;
         }
 
-        /* ---- CADRE PHOTO (ANNEAUX ÉPAIS ET ÉTIRÉS) ---- */
+        /* ---- CADRE PHOTO (ANNEAUX RAPPROCHÉS) ---- */
         .photo-frame {
-            width: 380px;
-            height: 380px;
+            width: 420px;
+            height: 420px;
             position: relative;
             display: grid;
             place-items: center;
@@ -509,14 +505,14 @@
             position: absolute;
             border-radius: 50%;
             display: grid;
-            /* Anneaux plus épais : 18px */
+            /* Épaisseur : 10px */
             -webkit-mask:
-                radial-gradient(farthest-side, transparent calc(100% - 18px), #000 calc(100% - 17px));
+                radial-gradient(farthest-side, transparent calc(100% - 10px), #000 calc(100% - 9px));
         }
+        /* Grand anneau : 380px / Petit anneau : 330px (rapprochés) */
         .ring-large {
-            width: 360px;
-            height: 360px;
-            /* Segments colorés plus longs */
+            width: 380px;
+            height: 380px;
             background:
                 conic-gradient(from 0deg,
                     #3730A3 0deg 100deg,
@@ -525,11 +521,11 @@
                     transparent 225deg 250deg,
                     #172554 250deg 350deg,
                     transparent 350deg 360deg);
-            animation: rotate-large 32s linear infinite;
+            animation: rotate-large 18s ease-in-out infinite alternate;
         }
         .ring-small {
-            width: 270px;
-            height: 270px;
+            width: 330px;
+            height: 330px;
             background:
                 conic-gradient(from 45deg,
                     #06B6D4 0deg 90deg,
@@ -538,28 +534,26 @@
                     transparent 210deg 235deg,
                     #172554 235deg 330deg,
                     transparent 330deg 360deg);
-            animation: rotate-small 22s linear infinite reverse;
+            animation: rotate-small 14s ease-in-out infinite alternate-reverse;
         }
         @keyframes rotate-large {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(80deg) scale(1.02); }
+            50% { transform: rotate(160deg) scale(1); }
+            75% { transform: rotate(240deg) scale(0.98); }
+            100% { transform: rotate(360deg) scale(1); }
         }
         @keyframes rotate-small {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg) scale(1); }
+            25% { transform: rotate(-70deg) scale(0.98); }
+            50% { transform: rotate(-150deg) scale(1); }
+            75% { transform: rotate(-230deg) scale(1.02); }
+            100% { transform: rotate(-360deg) scale(1); }
         }
 
         .profile-photo {
-            width: 180px;
-            height: 180px;
+            width: 220px;
+            height: 220px;
             object-fit: cover;
             border-radius: 50%;
             position: relative;
@@ -568,7 +562,6 @@
             box-shadow:
                 0 0 25px rgba(0, 212, 255, 0.25),
                 0 0 50px rgba(55, 48, 163, 0.20);
-            /* Effet flottant SUPPRIMÉ */
         }
 
         /* ===== HERO TEXTE ===== */
@@ -735,9 +728,7 @@
             font-weight: 500;
             color: var(--text-secondary);
         }
-        .skill-bar-percent {
-            display: none;
-        }
+        .skill-bar-percent { display: none; }
         .skill-bar-track {
             height: 5px;
             background: rgba(255, 255, 255, 0.04);
@@ -787,9 +778,7 @@
             margin-bottom: 32px;
             padding-left: 20px;
         }
-        .timeline-item:last-child {
-            margin-bottom: 0;
-        }
+        .timeline-item:last-child { margin-bottom: 0; }
         .timeline-dot {
             position: absolute;
             left: -35px;
@@ -818,10 +807,7 @@
             margin-bottom: 4px;
             text-transform: uppercase;
         }
-        .timeline-date i {
-            font-size: 0.7rem;
-            opacity: 0.8;
-        }
+        .timeline-date i { font-size: 0.7rem; opacity: 0.8; }
         .timeline-title {
             font-family: var(--font-heading);
             font-size: 1.1rem;
@@ -894,9 +880,7 @@
             box-shadow: var(--shadow-glow);
             transform: translateY(-3px);
         }
-        .skill-card:hover::after {
-            transform: scaleX(1);
-        }
+        .skill-card:hover::after { transform: scaleX(1); }
         .skill-card-icon {
             width: 52px;
             height: 52px;
@@ -1109,13 +1093,8 @@
             margin-left: 2px;
         }
         @keyframes cursorBlink {
-            0%,
-            100% {
-                opacity: 0.6;
-            }
-            50% {
-                opacity: 0;
-            }
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 0; }
         }
 
         /* ===== SCROLL PROGRESS ===== */
@@ -1160,206 +1139,67 @@
             opacity: 1;
             transform: translateX(0);
         }
-        .stagger-1 {
-            transition-delay: 0.1s;
-        }
-        .stagger-2 {
-            transition-delay: 0.2s;
-        }
-        .stagger-3 {
-            transition-delay: 0.3s;
-        }
-        .stagger-4 {
-            transition-delay: 0.4s;
-        }
-        .stagger-5 {
-            transition-delay: 0.5s;
-        }
-        .stagger-6 {
-            transition-delay: 0.6s;
-        }
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
+        .stagger-5 { transition-delay: 0.5s; }
+        .stagger-6 { transition-delay: 0.6s; }
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-            .interests-grid {
-                grid-template-columns: 1fr;
-            }
-            .contact-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .about-grid {
-                grid-template-columns: 1fr;
-            }
-            .hero-container {
-                gap: 40px;
-                text-align: center;
-            }
-            .hero-text {
-                text-align: center;
-            }
-            .hero-description {
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .hero-buttons {
-                justify-content: center;
-            }
-            .hero-greeting {
-                justify-content: center;
-            }
-            .hero-name-wrapper {
-                min-width: unset;
-                width: 100%;
-            }
-            .hero-name-scramble {
-                min-width: unset;
-                width: 100%;
-                text-align: center;
-            }
-            .footer-copyright-wrapper {
-                left: 16px;
-                font-size: 0.6rem;
-            }
-            .photo-frame {
-                width: 300px;
-                height: 300px;
-            }
-            .ring-large {
-                width: 280px;
-                height: 280px;
-            }
-            .ring-small {
-                width: 210px;
-                height: 210px;
-            }
-            .profile-photo {
-                width: 140px;
-                height: 140px;
-            }
+            .skills-grid { grid-template-columns: 1fr; }
+            .interests-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: repeat(2, 1fr); }
+            .about-grid { grid-template-columns: 1fr; }
+            .hero-container { gap: 40px; text-align: center; }
+            .hero-text { text-align: center; }
+            .hero-description { margin-left: auto; margin-right: auto; }
+            .hero-buttons { justify-content: center; }
+            .hero-greeting { justify-content: center; }
+            .hero-name-wrapper { min-width: unset; width: 100%; }
+            .hero-name-scramble { min-width: unset; width: 100%; text-align: center; }
+            .footer-copyright-wrapper { left: 16px; font-size: 0.6rem; }
+            .photo-frame { width: 320px; height: 320px; }
+            .ring-large { width: 290px; height: 290px; }
+            .ring-small { width: 250px; height: 250px; }
+            .profile-photo { width: 170px; height: 170px; }
         }
         @media (max-width: 768px) {
-            .navbar {
-                padding: 8px 16px;
-                height: 56px;
-            }
-            .navbar-links {
-                display: none;
-            }
-            .nav-toggle {
-                display: flex;
-            }
-            .navbar-name {
-                font-size: 0.8rem;
-            }
-            .navbar-avatar {
-                width: 34px;
-                height: 34px;
-            }
-            .mobile-menu {
-                top: 56px;
-            }
-            .photo-frame {
-                width: 260px;
-                height: 260px;
-            }
-            .ring-large {
-                width: 240px;
-                height: 240px;
-            }
-            .ring-small {
-                width: 180px;
-                height: 180px;
-            }
-            .profile-photo {
-                width: 120px;
-                height: 120px;
-            }
-            .section {
-                padding: 80px 16px 40px;
-            }
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            .about-info-grid {
-                grid-template-columns: 1fr;
-            }
-            .timeline {
-                padding-left: 30px;
-            }
-            .timeline::before {
-                left: 10px;
-            }
-            .timeline-dot {
-                left: -28px;
-                width: 14px;
-                height: 14px;
-                border-width: 2px;
-            }
-            .section-title-wrapper {
-                margin-bottom: 32px;
-            }
-            .section-sub-icon {
-                font-size: 2.6rem;
-            }
-            .footer-message {
-                font-size: 1.1rem;
-            }
-            .hero-name-scramble {
-                font-size: clamp(1.6rem, 4vw, 2.2rem);
-            }
-            .footer-copyright-wrapper {
-                left: 12px;
-                bottom: 12px;
-                font-size: 0.55rem;
-            }
+            .navbar { padding: 8px 16px; height: 56px; }
+            .navbar-links { display: none; }
+            .nav-toggle { display: flex; }
+            .navbar-name { font-size: 0.8rem; }
+            .navbar-avatar { width: 34px; height: 34px; }
+            .mobile-menu { top: 56px; }
+            .photo-frame { width: 280px; height: 280px; }
+            .ring-large { width: 250px; height: 250px; }
+            .ring-small { width: 220px; height: 220px; }
+            .profile-photo { width: 150px; height: 150px; }
+            .section { padding: 80px 16px 40px; }
+            .contact-grid { grid-template-columns: 1fr; }
+            .about-info-grid { grid-template-columns: 1fr; }
+            .timeline { padding-left: 30px; }
+            .timeline::before { left: 10px; }
+            .timeline-dot { left: -28px; width: 14px; height: 14px; border-width: 2px; }
+            .section-title-wrapper { margin-bottom: 32px; }
+            .section-sub-icon { font-size: 2.6rem; }
+            .footer-message { font-size: 1.1rem; }
+            .hero-name-scramble { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+            .footer-copyright-wrapper { left: 12px; bottom: 12px; font-size: 0.55rem; }
         }
         @media (max-width: 480px) {
-            .photo-frame {
-                width: 220px;
-                height: 220px;
-            }
-            .ring-large {
-                width: 200px;
-                height: 200px;
-            }
-            .ring-small {
-                width: 150px;
-                height: 150px;
-            }
-            .profile-photo {
-                width: 100px;
-                height: 100px;
-            }
-            .hero-title {
-                font-size: 1.6rem;
-            }
-            .btn {
-                padding: 10px 18px;
-                font-size: 0.85rem;
-            }
-            .glass-card {
-                padding: 18px;
-            }
-            .footer-message {
-                font-size: 1rem;
-            }
-            .hero-name-scramble {
-                font-size: clamp(1.3rem, 3.5vw, 1.6rem);
-                min-width: unset;
-                width: 100%;
-            }
-            .hero-name-wrapper {
-                min-width: unset;
-                width: 100%;
-            }
-            .footer-copyright-wrapper {
-                left: 10px;
-                bottom: 10px;
-                font-size: 0.5rem;
-            }
+            .photo-frame { width: 240px; height: 240px; }
+            .ring-large { width: 215px; height: 215px; }
+            .ring-small { width: 185px; height: 185px; }
+            .profile-photo { width: 130px; height: 130px; }
+            .hero-title { font-size: 1.6rem; }
+            .btn { padding: 10px 18px; font-size: 0.85rem; }
+            .glass-card { padding: 18px; }
+            .footer-message { font-size: 1rem; }
+            .hero-name-scramble { font-size: clamp(1.3rem, 3.5vw, 1.6rem); min-width: unset; width: 100%; }
+            .hero-name-wrapper { min-width: unset; width: 100%; }
+            .footer-copyright-wrapper { left: 10px; bottom: 10px; font-size: 0.5rem; }
         }
     </style>
 </head>
@@ -1372,6 +1212,9 @@
             <div class="loader"></div>
         </div>
     </div>
+
+    <!-- GLITCH OVERLAY (réparé) -->
+    <div class="glitch-overlay"></div>
 
     <!-- SCROLL PROGRESS -->
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -1417,7 +1260,7 @@
     <!-- HERO / ACCUEIL -->
     <section class="section visible" id="accueil" style="opacity:1; transform:none;">
         <div class="hero-container">
-            <!-- Cadre photo avec anneaux (photo fixe) -->
+            <!-- Cadre photo avec anneaux rapprochés -->
             <div class="photo-frame">
                 <div class="ring ring-large"></div>
                 <div class="ring ring-small"></div>
@@ -1911,15 +1754,22 @@
 
             // ========== PRELOADER (durée rallongée) ==========
             const preloader = document.getElementById('preloader');
+            const glitchOverlay = document.querySelector('.glitch-overlay');
             let loadProgress = 0;
             const preloadInterval = setInterval(() => {
-                // Progression plus lente pour rallonger le chargement (~4-5 secondes)
-                loadProgress += Math.random() * 8 + 2;
+                loadProgress += Math.random() * 7 + 2;
                 if (loadProgress >= 100) {
                     loadProgress = 100;
                     clearInterval(preloadInterval);
                     setTimeout(() => {
+                        // 1. Cacher le préchargeur
                         preloader.classList.add('hidden');
+                        // 2. Déclencher l'effet glitch juste après
+                        glitchOverlay.classList.add('active');
+                        // 3. Retirer la classe active après l'animation pour éviter les problèmes
+                        setTimeout(() => {
+                            glitchOverlay.classList.remove('active');
+                        }, 1500);
                     }, 500);
                 }
             }, 200);
@@ -1978,9 +1828,10 @@
                         }, loopDelay);
                     });
                 }
+                // Délai initial réduit à 800ms (au lieu de 1500ms)
                 setTimeout(() => {
                     doOneCycle();
-                }, 1500);
+                }, 800);
             }
 
             // ========== HERO NAME SCRAMBLE ==========
