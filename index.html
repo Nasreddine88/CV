@@ -907,7 +907,7 @@
             letter-spacing: -0.3px;
         }
 
-        /* ===== INTERESTS ===== */
+        /* ===== INTERESTS (animées par Intersection Observer) ===== */
         .interests-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -923,9 +923,9 @@
             text-align: center;
             transition: all var(--transition-spring);
             cursor: default;
-            /* État initial pour l’animation Anime.js */
+            /* État initial pour l’animation */
             opacity: 0;
-            transform: translateX(-60px) rotate(-5deg);
+            transform: translateX(-80px) rotate(-6deg);
         }
         .interest-card:hover {
             border-color: var(--border-hover);
@@ -955,7 +955,7 @@
             line-height: 1.7;
         }
 
-        /* ===== CONTACT ===== */
+        /* ===== CONTACT (animées par Intersection Observer) ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -973,9 +973,9 @@
             text-decoration: none;
             color: var(--text-primary);
             display: block;
-            /* État initial pour l’animation Anime.js */
+            /* État initial pour l’animation */
             opacity: 0;
-            transform: translateX(60px) rotate(5deg);
+            transform: translateX(80px) rotate(6deg);
         }
         .contact-card:hover {
             border-color: var(--border-hover);
@@ -1506,7 +1506,7 @@
         (function() {
             'use strict';
 
-            // ===== PRELOADER =====
+            // ===== PRELOADER & GLITCH =====
             const preloader = document.getElementById('preloader');
             const glitchOverlay = document.querySelector('.glitch-overlay');
             let loadProgress = 0;
@@ -1520,39 +1520,73 @@
                         glitchOverlay.classList.add('active');
                         setTimeout(() => {
                             glitchOverlay.classList.remove('active');
-                            // LANCER L'ANIMATION STAGGER APRÈS LE GLITCH
-                            animeStagger();
                         }, 1800);
                     }, 500);
                 }
             }, 200);
 
-            // ===== ANIME.JS STAGGER =====
-            function animeStagger() {
-                // Cartes "Centres d'intérêt"
-                anime({
-                    targets: '.interest-card',
-                    opacity: [0, 1],
-                    translateX: ['-80px', 0],
-                    rotate: ['-6deg', '0deg'],
-                    duration: 900,
-                    easing: 'easeOutBack',
-                    delay: anime.stagger(150, { start: 0 })
-                });
+            // =============================================
+            // INTERSECTION OBSERVER POUR LES ANIMATIONS
+            // =============================================
+            function setupCardAnimations() {
+                // Récupère toutes les cartes
+                const interestCards = document.querySelectorAll('.interest-card');
+                const contactCards = document.querySelectorAll('.contact-card');
 
-                // Cartes "Me contacter"
-                anime({
-                    targets: '.contact-card',
-                    opacity: [0, 1],
-                    translateX: ['80px', 0],
-                    rotate: ['6deg', '0deg'],
-                    duration: 900,
-                    easing: 'easeOutBack',
-                    delay: anime.stagger(150, { start: 300 })
-                });
+                // Fonction pour animer une carte individuelle
+                function animateCard(card, type) {
+                    const fromX = type === 'interest' ? '-80px' : '80px';
+                    const fromRotate = type === 'interest' ? '-6deg' : '6deg';
+                    anime({
+                        targets: card,
+                        opacity: [0, 1],
+                        translateX: [fromX, 0],
+                        rotate: [fromRotate, '0deg'],
+                        duration: 900,
+                        easing: 'easeOutBack',
+                    });
+                }
+
+                // Réinitialiser l'état de la carte (quand elle sort du viewport)
+                function resetCard(card) {
+                    const type = card.classList.contains('interest-card') ? 'interest' : 'contact';
+                    const fromX = type === 'interest' ? '-80px' : '80px';
+                    const fromRotate = type === 'interest' ? '-6deg' : '6deg';
+                    card.style.opacity = '0';
+                    card.style.transform = `translateX(${fromX}) rotate(${fromRotate})`;
+                }
+
+                // Options de l'observateur (seuil + marge pour déclencher un peu avant)
+                const options = {
+                    threshold: 0.2,
+                    rootMargin: '0px 0px -30px 0px' // un peu de marge pour éviter les déclenchements trop tardifs
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const card = entry.target;
+                        if (entry.isIntersecting) {
+                            // Délai de 400ms avant de lancer l'animation
+                            setTimeout(() => {
+                                const type = card.classList.contains('interest-card') ? 'interest' :
+                                    'contact';
+                                animateCard(card, type);
+                            }, 400);
+                        } else {
+                            // Réinitialiser quand la carte sort du viewport
+                            resetCard(card);
+                        }
+                    });
+                }, options);
+
+                // Observer chaque carte
+                interestCards.forEach(card => observer.observe(card));
+                contactCards.forEach(card => observer.observe(card));
             }
 
-            // ===== SCRAMBLE TEXT =====
+            // =============================================
+            // SCRAMBLE TEXT (boucle continue)
+            // =============================================
             function scrambleTextElement(element, text, duration, callback) {
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@';
                 const originalText = text;
@@ -1605,7 +1639,9 @@
             footerScrambleEl.style.display = 'inline-block';
             startScrambleLoop(footerScrambleEl, footerText, 1600, 4500);
 
-            // ===== PARTICLES =====
+            // =============================================
+            // PARTICLES (fond animé)
+            // =============================================
             const canvas = document.getElementById('particles-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
@@ -1702,7 +1738,9 @@
             document.addEventListener('mouseleave', () => { mouseX = -9999;
                 mouseY = -9999; });
 
-            // ===== NAVBAR & SCROLL =====
+            // =============================================
+            // NAVBAR, SCROLL, REVEAL...
+            // =============================================
             const navbar = document.getElementById('navbar');
             const scrollProgress = document.getElementById('scrollProgress');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -1744,6 +1782,8 @@
                 updateActiveSection();
                 checkReveals();
                 animateSkillBars();
+                // Lancer l'observateur après le chargement
+                setupCardAnimations();
             });
 
             function checkReveals() {
@@ -1828,7 +1868,7 @@
                 });
             }, 400);
 
-            console.log('%c Portfolio Nasr-Eddine — Cyan → Bleu → Indigo → Violet ',
+            console.log('%c Portfolio Nasr-Eddine — Intersection Observer Stagger ',
                 'background: linear-gradient(135deg, #00d4ff, #2563eb, #4f46e5, #7c3aed); color: white; font-size: 14px; padding: 10px 20px; border-radius: 30px; font-weight: bold;'
             );
 
