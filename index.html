@@ -170,20 +170,41 @@
                 box-shadow: 0 0 70px rgba(0, 212, 255, 0.8);
             }
         }
-        .preloader-bar {
-            width: 220px;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 2px;
-            overflow: hidden;
+
+        /* ---- NOUVEAU LOADER ---- */
+        .loader {
+            height: 15px;
+            aspect-ratio: 4;
+            --_g: no-repeat radial-gradient(farthest-side, var(--accent-cyan) 90%, #0000);
+            background:
+                var(--_g) left,
+                var(--_g) right;
+            background-size: 25% 100%;
+            display: grid;
             margin: 0 auto;
         }
-        .preloader-bar-fill {
-            width: 0%;
-            height: 100%;
-            background: var(--accent-gradient);
-            border-radius: 2px;
-            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        .loader:before,
+        .loader:after {
+            content: "";
+            height: inherit;
+            aspect-ratio: 1;
+            grid-area: 1/1;
+            margin: auto;
+            border-radius: 50%;
+            transform-origin: -100% 50%;
+            background: var(--accent-cyan);
+            animation: l49 1s infinite linear;
+        }
+        .loader:after {
+            transform-origin: 200% 50%;
+            --s: -1;
+            animation-delay: -.5s;
+        }
+        @keyframes l49 {
+            58%,
+            100% {
+                transform: rotate(calc(var(--s, 1) * 1turn));
+            }
         }
 
         /* ===== NAVBAR ===== */
@@ -474,30 +495,52 @@
             max-width: 1100px;
             margin: 0 auto;
         }
-        .hero-photo-wrapper {
+
+        /* ---- CADRE PHOTO (ANNEAUX ÉPAIS ET ÉTIRÉS) ---- */
+        .photo-frame {
+            width: 380px;
+            height: 380px;
             position: relative;
+            display: grid;
+            place-items: center;
             flex-shrink: 0;
         }
-        .hero-photo-ring {
+        .ring {
             position: absolute;
-            inset: -15px;
             border-radius: 50%;
-            border: 2px solid rgba(0, 212, 255, 0.2);
-            animation: ringRotate 10s linear infinite;
+            display: grid;
+            /* Anneaux plus épais : 18px */
+            -webkit-mask:
+                radial-gradient(farthest-side, transparent calc(100% - 18px), #000 calc(100% - 17px));
         }
-        .hero-photo-ring::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 12px;
-            height: 12px;
-            background: var(--accent-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-            transform: translateX(-50%);
+        .ring-large {
+            width: 360px;
+            height: 360px;
+            /* Segments colorés plus longs */
+            background:
+                conic-gradient(from 0deg,
+                    #3730A3 0deg 100deg,
+                    transparent 100deg 125deg,
+                    #06B6D4 125deg 225deg,
+                    transparent 225deg 250deg,
+                    #172554 250deg 350deg,
+                    transparent 350deg 360deg);
+            animation: rotate-large 32s linear infinite;
         }
-        @keyframes ringRotate {
+        .ring-small {
+            width: 270px;
+            height: 270px;
+            background:
+                conic-gradient(from 45deg,
+                    #06B6D4 0deg 90deg,
+                    transparent 90deg 115deg,
+                    #3730A3 115deg 210deg,
+                    transparent 210deg 235deg,
+                    #172554 235deg 330deg,
+                    transparent 330deg 360deg);
+            animation: rotate-small 22s linear infinite reverse;
+        }
+        @keyframes rotate-large {
             from {
                 transform: rotate(0deg);
             }
@@ -505,34 +548,30 @@
                 transform: rotate(360deg);
             }
         }
-        .hero-photo {
-            width: 280px;
-            height: 280px;
-            border-radius: 50%;
-            border: 3px solid rgba(0, 212, 255, 0.5);
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(0, 212, 255, 0.25), 0 0 100px rgba(0, 212, 255, 0.08);
-            animation: heroFloat 6s ease-in-out infinite;
-            position: relative;
+        @keyframes rotate-small {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
         }
-        .hero-photo img {
-            width: 100%;
-            height: 100%;
+
+        .profile-photo {
+            width: 180px;
+            height: 180px;
             object-fit: cover;
-            transition: transform 0.6s var(--ease-out-expo);
+            border-radius: 50%;
+            position: relative;
+            z-index: 10;
+            border: 3px solid var(--accent-cyan);
+            box-shadow:
+                0 0 25px rgba(0, 212, 255, 0.25),
+                0 0 50px rgba(55, 48, 163, 0.20);
+            /* Effet flottant SUPPRIMÉ */
         }
-        .hero-photo:hover img {
-            transform: scale(1.05);
-        }
-        @keyframes heroFloat {
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
+
+        /* ===== HERO TEXTE ===== */
         .hero-text {
             max-width: 560px;
             flex: 1;
@@ -1184,6 +1223,22 @@
                 left: 16px;
                 font-size: 0.6rem;
             }
+            .photo-frame {
+                width: 300px;
+                height: 300px;
+            }
+            .ring-large {
+                width: 280px;
+                height: 280px;
+            }
+            .ring-small {
+                width: 210px;
+                height: 210px;
+            }
+            .profile-photo {
+                width: 140px;
+                height: 140px;
+            }
         }
         @media (max-width: 768px) {
             .navbar {
@@ -1206,12 +1261,21 @@
             .mobile-menu {
                 top: 56px;
             }
-            .hero-photo {
-                width: 200px;
-                height: 200px;
+            .photo-frame {
+                width: 260px;
+                height: 260px;
             }
-            .hero-photo-ring {
-                inset: -10px;
+            .ring-large {
+                width: 240px;
+                height: 240px;
+            }
+            .ring-small {
+                width: 180px;
+                height: 180px;
+            }
+            .profile-photo {
+                width: 120px;
+                height: 120px;
             }
             .section {
                 padding: 80px 16px 40px;
@@ -1253,9 +1317,21 @@
             }
         }
         @media (max-width: 480px) {
-            .hero-photo {
-                width: 160px;
-                height: 160px;
+            .photo-frame {
+                width: 220px;
+                height: 220px;
+            }
+            .ring-large {
+                width: 200px;
+                height: 200px;
+            }
+            .ring-small {
+                width: 150px;
+                height: 150px;
+            }
+            .profile-photo {
+                width: 100px;
+                height: 100px;
             }
             .hero-title {
                 font-size: 1.6rem;
@@ -1293,9 +1369,7 @@
     <div id="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">NS</div>
-            <div class="preloader-bar">
-                <div class="preloader-bar-fill" id="preloaderFill"></div>
-            </div>
+            <div class="loader"></div>
         </div>
     </div>
 
@@ -1343,12 +1417,13 @@
     <!-- HERO / ACCUEIL -->
     <section class="section visible" id="accueil" style="opacity:1; transform:none;">
         <div class="hero-container">
-            <div class="hero-photo-wrapper">
-                <div class="hero-photo-ring"></div>
-                <div class="hero-photo">
-                    <img src="photo-de-profile.jpg" alt="Photo de profil Nasr Eddine">
-                </div>
+            <!-- Cadre photo avec anneaux (photo fixe) -->
+            <div class="photo-frame">
+                <div class="ring ring-large"></div>
+                <div class="ring ring-small"></div>
+                <img src="photo-de-profile.jpg" class="profile-photo" alt="Photo de profil Nasr Eddine">
             </div>
+
             <div class="hero-text">
                 <div class="hero-greeting">Bonjour, je suis</div>
                 <h1 class="hero-title">
@@ -1834,21 +1909,20 @@
         (function() {
             'use strict';
 
-            // ========== PRELOADER ==========
+            // ========== PRELOADER (durée rallongée) ==========
             const preloader = document.getElementById('preloader');
-            const preloaderFill = document.getElementById('preloaderFill');
             let loadProgress = 0;
             const preloadInterval = setInterval(() => {
-                loadProgress += Math.random() * 18 + 4;
+                // Progression plus lente pour rallonger le chargement (~4-5 secondes)
+                loadProgress += Math.random() * 8 + 2;
                 if (loadProgress >= 100) {
                     loadProgress = 100;
                     clearInterval(preloadInterval);
                     setTimeout(() => {
                         preloader.classList.add('hidden');
-                    }, 300);
+                    }, 500);
                 }
-                preloaderFill.style.width = Math.min(loadProgress, 100) + '%';
-            }, 120);
+            }, 200);
 
             // ========== SCRAMBLE TEXT UTILITY ==========
             function scrambleTextElement(element, text, duration, callback) {
