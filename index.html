@@ -4,1291 +4,2186 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/f212443d9e.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/f212443d9e.js" crossorigin="anonymous">
+    </script>
     <title>Nasr-Eddine | Portfolio</title>
     <link rel="shortcut icon" href="logo-NS.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-      @import url('https://fonts.googleapis.com/css2?family=Cambria:wght@400;700&display=swap');
-      
-html, body {
-     margin: 0;
-     padding: 0;
-     background-color: #0b0c2a;
-     background-image: url('ASA.png');
-     background-size: cover;
-     background-attachment: fixed;
-     background-position: center;
-     color: white;
-     font-family: 'Cambria', serif;
-     overflow-x: hidden;
-     scroll-behavior: smooth;
-}
-
-      #particles-js {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-      }
-
-      .content {
-        position: relative;
-        z-index: 1;
-        text-align: center;
-        padding: 100px 20px 50px;
-      }
-
-      h1, h2, h3, h4 {
-        color: #00d4ff;
-        font-family: 'Cambria', serif;
-        font-weight: 900;
-      }
-
-      h1 {
-        font-size: 9em;
-      }
-
-      p {
-        color: #ccc;
-        max-width: 900px;
-        margin: auto;
-        font-family: 'Cambria', serif; 
-    
-      }
-
-      section {
-        position: relative;
-        z-index: 1;
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: 0;
-        transition: all 1s ease-out;
-        padding: 50px;
-        text-align: center;
-      }
-
-      section.show {
-        opacity: 1;
-      }
-
-      .block {
-        background: rgba(0, 212, 255, 0.1);
-        padding: 80px;
-        border-radius: 30px;
-        width: 85vw;
-        max-width: 1300px;
-        box-shadow: 0 0 40px rgba(0, 212, 255, 0.8);
-        backdrop-filter: blur(8px);
-        margin: 20px auto;
-        animation: float-main 6s ease-in-out infinite;
-      }
-      
-      nav {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        right: 20px;
-        z-index: 10;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: rgba(0, 212, 255, 0.1);
-        padding: 10px 20px;
-        border-radius: 30px;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.3);
-        border:none
-
-      }
-
-      .profile-container {
-        display: flex;
-        align-items: center;
-      }
-
-      .profile-circle {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        border: 2px solid #00d4ff;
-        margin-right: 15px;
-        overflow: hidden;
-        box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-        transition: all 0.3s;
-      }
-
-      .profile-circle:hover {
-        transform: scale(1.05);
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
-        border: 2px solid #00d4ff;
-      }
-
-      .profile-circle img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
-
-      .menu-items {
-        display: flex;
-        gap: 10px;
-      }
-
-      .menu-items button {
-        background: none;
-        border: none;
-        color: white;
-        padding: 12px 20px;
-        cursor: pointer;
-        font-family: 'Cambria', serif;
-        font-size: 1.1em;
-        border-radius: 30px;
-        transition: all 0.3s;
-        background: rgba(0, 212, 255, 0.1);
-      }
-
-      .menu-items button:hover {
-        background: rgba(0, 212, 255, 0.3);
-        color: #00d4ff;
-        transform: translateY(1px);
-        box-shadow: 0 5px 15px rgba(0, 213, 255, 0.6);
-      }
-
-      /* Styles pour les détails blocks avec animation */
-      .details-box {
-        background: rgba(0, 213, 255, 0.068);
-        padding: 20px;
-        border-radius: 15px;
-        margin-bottom: 20px;
-        border-left: 4px solid #00d4ff;
-        transition: all 0.5s ease-out;
-        position: relative;
-        overflow: hidden;
-
-
-      }
-
-      .details-box::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 0;
-        height: 100%;
-        background: linear-gradient(90deg, rgba(0,212,255,0.1), rgba(0,212,255,0.3));
-        transition: width 0.5s ease;
-        z-index: -1;
-      }
-
-
-      .details-box:hover::before {
-        width: 100%;
-      }
-
-      .details-box:nth-child(odd) {
-        transform: translateX(-100px);
-        opacity: 0;
-      }
-
-      .details-box:nth-child(even) {
-        transform: translateX(100px);
-        opacity: 0;
-      }
-
-      .details-box.show {
-        transform: translateX(0) !important;
-        opacity: 1 !important;
-      }
-
-      /* Animation pour les titres */
-      .title-animate {
-        display: inline-block;
-        position: relative;
-      }
-
-      .title-animate span {
-        display: inline-block;
-        opacity: 0;
-        transform: translateY(20px);
-        transition: all 0.3s ease;
-      }
-
-      .title-animate.show span {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      /* Animation pour le nom */
-      .name-animation {
-        position: relative;
-        display: inline-block;
-      }
-      
-      .name-animation span {
-        display: inline-block;
-        color: #00d4ff;
-      }
-
-      /* Styles spécifiques pour votre contenu */
-      .grid {
-        display: grid;
-        gap: 25px;
-      }
-
-      .grid--2--col {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .grid--3--col {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .grid--4--col {
-        grid-template-columns: repeat(4, 1fr);
-      }
-
-      .btn {
-        display: inline-block;
-        padding: 12px 25px;
-        background: rgba(0, 213, 255, 0.589);
-        color: #00d4ff;
-        border: 1px solid #00d4ff;
-        border-radius: 30px;
-        text-decoration: none;
-        margin: 15px 10px;
-        transition: all 0.3s;
-        font-family: 'Cambria', serif;
-        font-size: 1.1em;
-      }
-
-      .btn:hover {
-        background: rgba(0, 212, 255, 0.4);
-        box-shadow: 0 0 15px rgba(0, 212, 255, 0.8);
-        transform: translateY(-3px);
-      }
-
-      .skill-bar {
-        height: 12px;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 6px;
-        margin: 8px 0 20px;
-      }
-
-      .skill-bar span {
-        display: block;
-        height: 100%;
-        background: linear-gradient(90deg, #00d4ff, #0066ff);
-        border-radius: 6px;
-        box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-      }
-
-      .icon {
-        font-size: 28px;
-        color: #00d4ff;
-        margin-right: 12px;
-      }
-
-      .service-box {
-        background: rgba(0, 212, 255, 0.08);
-        padding: 25px;
-        border-radius: 15px;
-        border-top: 4px solid #00d4ff;
-        transition: all 0.3s;
-        height: 100%;
-      }
-
-      .service-box:hover {
-        background: rgba(0, 212, 255, 0.15);
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 212, 255, 0.2);
-      }
-
-      .icon-box {
-        font-size: 50px;
-        margin-bottom: 20px;
-      }
-
-      a {
-        color: #00d4ff;
-        text-decoration: none;
-        transition: all 0.3s;
-      }
-
-      a:hover {
-        text-decoration: underline;
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-      }
-
-      .year {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-      }
-
-      .year p {
-        margin: 0;
-        color: #00d4ff;
-        font-weight: bold;
-      }
-
-      /* Style pour la section d'accueil */
-      .home-content {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 50px;
-        flex-wrap: wrap;
-      }
-
-      .profile-photo-large {
-        width: 300px;
-        height: 300px;
-        border-radius: 50%;
-        border: 3px solid #00d4ff;
-        overflow: hidden;
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
-        animation: float 6s ease-in-out infinite;
-      }
-
-      .profile-photo-large img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        transition: transform 0.5s;
-      }
-
-      .profile-photo-large:hover img {
-        transform: scale(1.05);
-      }
-
-      .home-text-box {
-        max-width: 600px;
-        text-align: left;
-      }
-
-      /* Animation pour les titres des sections */
-      .section-title {
-        position: relative;
-        display: inline-block;
-        margin-bottom: 40px;
-        animation: titleEntry 1s ease-out forwards;
-      }
-
-      .section-title::after {
-        content: '';
-        position: absolute;
-        width: 0;
-        height: 3px;
-        bottom: -10px;
-        left: 0;
-        background-color: #00d4ff;
-        transition: width 0.6s ease-out;
-      }
-
-      .block:hover .section-title::after {
-        width: 100%;
-      }
-
-      /* Effet de soulignement au survol */
-      .section-title:hover {
-        text-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
-      }
-
-      @keyframes titleEntry {
-        0% {
-          transform: translateY(-30px);
-          opacity: 0;
-        }
-        100% {
-          transform: translateY(0);
-          opacity: 1;
-        }
-      }
-
-      /* Style pour le nouveau bloc "Merci" */
-      .thank-you-block {
-        position: relative;
-        z-index: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 40px 20px;
-        margin-bottom: 50px;
-      }
-
-      .thank-you-content {
-        background: rgba(0, 212, 255, 0.1);
-        padding: 30px 60px;
-        border-radius: 30px;
-        box-shadow: 0 0 30px rgba(0, 212, 255, 0.5);
-        backdrop-filter: blur(8px);
-        border: 1px solid #00d4ff;
-        animation: float 6s ease-in-out infinite;
-      }
-
-      .thank-you-text {
-        color: #00d4ff;
-        font-size: 1.8em;
-        margin: 0;
-        text-align: center;
-      }
-
-      @keyframes float {
-        0% { transform: translateY(0px); }
-        50% { transform: translateY(-10px); }
-        100% { transform: translateY(0px); }
-      }
-
-      .service-box {
-        animation: float-secondary 20s ease-in-out infinite;
-      }
-
-
-
-
-      @media (max-width: 992px) {
-        .menu-items {
-          display: none;
-          position: absolute;
-          top: 100%;
-          left: 0;
-          right: 0;
-          background: rgba(27, 31, 59, 0.95);
-          padding: 15px;
-          border-radius: 15px;
-          box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
-          flex-direction: column;
-          margin-top: 10px;
-          backdrop-filter: blur(10px);
-        }
-        
-        .menu-items.show {
-          display: flex;
-        }
-        
-        .menu-toggle {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          width: 50px;
-          height: 50px;
-          background: rgba(0, 213, 255, 0.534);
-          color: #00d4ff;
-          border: 2px solid #00d4ff;
-          padding: 12px 15px;
-          border-radius: 30px;
-          cursor: pointer;
-          font-weight: bold;
-          font-family: 'Cambria', serif;
-          font-size: 1.1em;
-          box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-          backdrop-filter: blur(8px);
-          transition: all 0.3s;
+        /* ===== ROOT - THÈME CYAN → BLEU → INDIGO → VIOLET ===== */
+        :root {
+            --bg-primary: #05050f;
+            --bg-secondary: #0a0a1e;
+            --bg-card: rgba(255, 255, 255, 0.02);
+            --bg-glass: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(0, 212, 255, 0.4);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --accent-cyan: #00d4ff;
+            --accent-blue: #2563eb;
+            --accent-indigo: #4f46e5;
+            --accent-violet: #7c3aed;
+            --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #2563eb 40%, #4f46e5 70%, #7c3aed 100%);
+            --accent-gradient-soft: linear-gradient(135deg, rgba(0, 212, 255, 0.12) 0%, rgba(37, 99, 235, 0.12) 40%, rgba(79, 70, 229, 0.12) 70%, rgba(124, 58, 237, 0.12) 100%);
+            --font-heading: 'Space Grotesk', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+            --radius-sm: 8px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --shadow-glow: 0 0 40px rgba(0, 212, 255, 0.15);
+            --shadow-glow-strong: 0 0 60px rgba(0, 212, 255, 0.3);
+            --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-base: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            --transition-spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .menu-toggle span {
-          display: block;
-          width: 25px;
-          height: 3px;
-          background: #00d4ff;
-          margin: 3px 0;
-          transition: all 0.3s;
-        }
-      }
-
-      @media (max-width: 768px) {
-        h1 {
-          font-size: 2.2em;
+        /* ===== RESET ===== */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        .block {
-          padding: 40px;
-          width: 90vw;
+        html {
+            scroll-behavior: smooth;
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent-cyan) var(--bg-primary);
         }
 
-        .grid--2--col, 
-        .grid--3--col,
-        .grid--4--col {
-          grid-template-columns: 1fr;
-        }
-        
-        nav {
-          flex-direction: column;
-          align-items: flex-start;
-        }
-        
-        .profile-container {
-          width: 100%;
-          justify-content: space-between;
-          margin-bottom: 10px;
-        }
-        
-        .profile-circle {
-          width: 60px;
-          height: 60px;
+        body {
+            background-color: var(--bg-primary);
+            background-image:
+                radial-gradient(ellipse at 20% 50%, rgba(0, 212, 255, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(37, 99, 235, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(79, 70, 229, 0.02) 0%, transparent 50%);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.7;
+            min-height: 100vh;
+            cursor: default;
         }
 
-        /* Responsive pour la photo */
-        .home-content {
-          flex-direction: column;
-          text-align: center;
-        }
-        
-        .profile-photo-large {
-          width: 200px;
-          height: 200px;
-        }
-        
-        .home-text-box {
-          text-align: center;
+        ::selection {
+            background: rgba(0, 212, 255, 0.3);
+            color: #fff;
         }
 
-    
-       
-      }
-      nav {
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background: rgba(0, 212, 255, 0.1);
-  padding: 10px 20px;
-  border-radius: 30px;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-  backdrop-filter: blur(8px);
-  border: 2px solid #00d4ff;
-}
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-primary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-violet));
+            border-radius: 3px;
+        }
 
-.profile-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
+        /* ===== PARTICLES ===== */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-.profile-circle {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  border: 2px solid #00d4ff;
-  margin-right: 15px;
-  overflow: hidden;
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
-  transition: all 0.3s;
-}
+        /* ===== PRELOADER ===== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-primary);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        .preloader-content {
+            text-align: center;
+        }
+        .preloader-logo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid var(--accent-cyan);
+            box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: var(--accent-cyan);
+            animation: preloaderPulse 1.2s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+        .preloader-logo::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            opacity: 0.15;
+            z-index: -1;
+            animation: preloaderSpin 3s linear infinite;
+        }
+        @keyframes preloaderSpin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes preloaderPulse {
+            0%,
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 40px rgba(0, 212, 255, 0.5);
+            }
+            50% {
+                transform: scale(1.06);
+                box-shadow: 0 0 70px rgba(0, 212, 255, 0.8);
+            }
+        }
+        .preloader-bar {
+            width: 220px;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 2px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
+        .preloader-bar-fill {
+            width: 0%;
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+            transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
 
-.profile-circle:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(0, 212, 255, 0.8);
-}
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 24px;
+            background: rgba(5, 5, 15, 0.85);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-bottom: 1px solid var(--border-glass);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+            transition: all var(--transition-base);
+            height: 64px;
+        }
+        .navbar.scrolled {
+            background: rgba(5, 5, 15, 0.95);
+            border-bottom-color: rgba(0, 212, 255, 0.2);
+            box-shadow: 0 4px 40px rgba(0, 0, 0, 0.6);
+        }
+        .navbar-left {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
+        }
+        .navbar-avatar {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            border: 2px solid var(--accent-cyan);
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+            transition: all var(--transition-base);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .navbar-avatar:hover {
+            box-shadow: 0 0 25px rgba(0, 212, 255, 0.6);
+            transform: scale(1.05);
+        }
+        .navbar-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .navbar-name {
+            color: var(--text-primary);
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+        }
+        .navbar-links {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+            flex-wrap: nowrap;
+        }
+        .nav-link {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            padding: 8px 14px;
+            cursor: pointer;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 500;
+            border-radius: 20px;
+            transition: all var(--transition-base);
+            position: relative;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .nav-link i {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+        .nav-link:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+        .nav-link.active {
+            color: var(--accent-cyan);
+            background: rgba(0, 212, 255, 0.12);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.08);
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 2px;
+            background: var(--accent-cyan);
+            border-radius: 1px;
+            box-shadow: 0 0 8px rgba(0, 212, 255, 0.5);
+        }
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 8px;
+            transition: all var(--transition-fast);
+        }
+        .nav-toggle span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-primary);
+            border-radius: 2px;
+            transition: all var(--transition-base);
+        }
+        .nav-toggle.open span:nth-child(1) {
+            transform: translateY(7px) rotate(45deg);
+        }
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .nav-toggle.open span:nth-child(3) {
+            transform: translateY(-7px) rotate(-45deg);
+        }
 
-.profile-circle img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            background: rgba(5, 5, 15, 0.97);
+            backdrop-filter: blur(30px) saturate(180%);
+            -webkit-backdrop-filter: blur(30px) saturate(180%);
+            border-bottom: 1px solid var(--border-glass);
+            padding: 12px 20px;
+            z-index: 999;
+            flex-direction: column;
+            gap: 2px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            animation: menuSlideIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .mobile-menu.open {
+            display: flex;
+        }
+        @keyframes menuSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .mobile-menu .nav-link {
+            padding: 12px 16px;
+            font-size: 0.9rem;
+            border-radius: 10px;
+        }
 
-.profile-name {
-  color: white;
-  font-weight: bold;
-  font-size: 1.2em;
-  margin-right: auto; /* Pousse le menu vers la droite */
-}
+        /* ===== SECTIONS ===== */
+        .section {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 24px 60px;
+            opacity: 0;
+            transform: perspective(800px) rotateX(15deg) translateY(40px);
+            transition: opacity 0.8s var(--ease-out-expo), transform 0.8s var(--ease-out-expo);
+        }
+        .section.visible {
+            opacity: 1;
+            transform: perspective(800px) rotateX(0deg) translateY(0);
+        }
+        .section-inner {
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
 
-.menu-toggle-container {
-  display: flex;
-  align-items: center;
-}
+        /* ===== SECTION TITLE ===== */
+        .section-title-wrapper {
+            text-align: center;
+            margin-bottom: 48px;
+            position: relative;
+        }
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+            display: inline-block;
+            position: relative;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.15));
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+        }
+        .section-sub-icon {
+            font-size: 3.2rem;
+            display: inline-block;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 4px;
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2));
+        }
 
-.menu-items {
-  display: flex;
-  gap: 10px;
-}
+        /* ===== GLASS CARD ===== */
+        .glass-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.3), rgba(37, 99, 235, 0.3), rgba(79, 70, 229, 0.3), transparent);
+            opacity: 0;
+            transition: opacity var(--transition-base);
+        }
+        .glass-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-2px);
+        }
+        .glass-card:hover::before {
+            opacity: 1;
+        }
 
-.menu-items button {
-  background: none;
-  border: none;
-  color: white;
-  padding: 12px 20px;
-  cursor: pointer;
-  border: 1px solid #00d4ff;
-  font-family: 'Cambria', serif;
-  font-size: 1.1em;
-  border-radius: 30px;
-  transition: all 0.3s;
-  background: rgba(0, 212, 255, 0.1);
-}
+        /* ===== HERO ===== */
+        #accueil {
+            padding-top: 80px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        .hero-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            flex-wrap: wrap;
+            width: 100%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .hero-photo-wrapper {
+            position: relative;
+            flex-shrink: 0;
+        }
+        .hero-photo-ring {
+            position: absolute;
+            inset: -15px;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 212, 255, 0.2);
+            animation: ringRotate 10s linear infinite;
+        }
+        .hero-photo-ring::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 12px;
+            height: 12px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
+            transform: translateX(-50%);
+        }
+        @keyframes ringRotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+        .hero-photo {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            border: 3px solid rgba(0, 212, 255, 0.5);
+            overflow: hidden;
+            box-shadow: 0 0 50px rgba(0, 212, 255, 0.25), 0 0 100px rgba(0, 212, 255, 0.08);
+            animation: heroFloat 6s ease-in-out infinite;
+            position: relative;
+        }
+        .hero-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s var(--ease-out-expo);
+        }
+        .hero-photo:hover img {
+            transform: scale(1.05);
+        }
+        @keyframes heroFloat {
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        .hero-text {
+            max-width: 560px;
+            flex: 1;
+            min-width: 300px;
+        }
+        .hero-greeting {
+            font-family: var(--font-mono);
+            font-size: 0.9rem;
+            color: var(--accent-cyan);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .hero-greeting::before {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background: var(--accent-cyan);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.6);
+        }
+        .hero-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .hero-name-wrapper {
+            display: inline-block;
+            min-width: 22ch;
+            max-width: 100%;
+        }
+        .hero-name-scramble {
+            display: inline-block;
+            font-weight: 700;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: inherit;
+            letter-spacing: 0.5px;
+            min-width: 22ch;
+            text-align: left;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.15));
+        }
+        .hero-description {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-top: 20px;
+            max-width: 500px;
+            line-height: 1.8;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            margin-top: 28px;
+            flex-wrap: wrap;
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 35px;
+            font-family: var(--font-body);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all var(--transition-spring);
+            position: relative;
+            overflow: hidden;
+            border: none;
+        }
+        .btn-primary {
+            background: var(--accent-gradient);
+            color: #05050f;
+            box-shadow: 0 4px 20px rgba(0, 212, 255, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(0, 212, 255, 0.5);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-glass);
+        }
+        .btn-secondary:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+            transform: translateY(-2px);
+        }
 
-.menu-items button:hover {
-  background: rgba(0, 212, 255, 0.3);
-  color: #00d4ff;
-  transform: translateY(1px);
-  box-shadow: 0 5px 15px rgba(0, 213, 255, 0.6);
-}
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 20px;
+        }
+        .about-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+        .info-item {
+            padding: 16px;
+            border-radius: var(--radius-md);
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-glass);
+            transition: all var(--transition-base);
+            text-align: left;
+        }
+        .info-item:hover {
+            border-color: rgba(0, 212, 255, 0.3);
+            background: rgba(0, 212, 255, 0.05);
+            transform: translateY(-1px);
+        }
+        .info-item-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+            font-weight: 500;
+        }
+        .info-item-value {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+        .info-item-value a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+        }
+        .info-item-value a:hover {
+            text-decoration: underline;
+            text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
+        }
 
-/* Styles pour le menu mobile */
-@media (max-width: 992px) {
-  .menu-items {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background: rgba(1, 15, 17, 0.747);
-    padding: 15px;
-    border: 1px solid #00d4ff;
-    border-radius: 20px;
-    backdrop-filter: blur(30px);
-    box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
-    flex-direction: column;
-    margin-top: 10px;
-    transition: all 0.3s ease-out;
-  
-  }
-  
-  .menu-items.show {
-    display: flex;
-  }
-  
-  .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 50px;
-    height: 50px;
-    background: rgba(0, 212, 255, 0.1);
-    color: #00d4ff;
-    border: 2px solid #00d4ff;
-    padding: 12px 15px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-weight: bold;
-    font-family: 'Cambria', serif;
-    font-size: 1.1em;
-    box-shadow: 0 0 20px rgba(0, 212, 255, 0.8);
-    backdrop-filter: blur(8px);
-    transition: all 0.3s;
-  }
+        /* ===== SKILL BARS ===== */
+        .skill-bar-container {
+            margin-bottom: 14px;
+        }
+        .skill-bar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        .skill-bar-name {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        .skill-bar-percent {
+            display: none;
+        }
+        .skill-bar-track {
+            height: 5px;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 3px;
+            overflow: hidden;
+            position: relative;
+        }
+        .skill-bar-fill {
+            height: 100%;
+            background: var(--accent-gradient);
+            border-radius: 3px;
+            width: 0;
+            transition: width 1.2s var(--ease-out-expo);
+            box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+            position: relative;
+        }
+        .skill-bar-fill::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 16px;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 3px;
+            filter: blur(2px);
+        }
 
-  .menu-toggle span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: #00d4ff;
-    margin: 3px 0;
-    transition: all 0.3s;
-  }
+        /* ===== TIMELINE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 14px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, rgba(0, 212, 255, 0.3), rgba(37, 99, 235, 0.3), rgba(79, 70, 229, 0.3), rgba(124, 58, 237, 0.3));
+            border-radius: 1px;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.1);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 32px;
+            padding-left: 20px;
+        }
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: -35px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--accent-cyan);
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transition: all var(--transition-base);
+        }
+        .timeline-item:hover .timeline-dot {
+            border-color: var(--accent-violet);
+            box-shadow: 0 0 25px rgba(124, 58, 237, 0.5);
+            transform: scale(1.1);
+        }
+        .timeline-date {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.8px;
+            margin-bottom: 4px;
+            text-transform: uppercase;
+        }
+        .timeline-date i {
+            font-size: 0.7rem;
+            opacity: 0.8;
+        }
+        .timeline-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            letter-spacing: -0.3px;
+        }
+        .timeline-company {
+            font-size: 0.85rem;
+            color: var(--accent-cyan);
+            font-weight: 500;
+            margin-bottom: 6px;
+            letter-spacing: 0.2px;
+        }
+        .timeline-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .timeline-description ul {
+            list-style: none;
+            padding: 0;
+            margin-top: 6px;
+        }
+        .timeline-description ul li {
+            position: relative;
+            padding-left: 16px;
+            margin-bottom: 3px;
+        }
+        .timeline-description ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-size: 0.75rem;
+        }
 
-  .profile-name {
-    display: none; /* Cache le nom sur mobile */
-  }
-  
-  .profile-circle {
-    width: 60px;
-    height: 60px;
-    margin-right: 0;
-  }
-}
+        /* ===== SKILLS CARDS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .skill-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+        }
+        .skill-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--accent-gradient);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-slow);
+        }
+        .skill-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+        .skill-card:hover::after {
+            transform: scaleX(1);
+        }
+        .skill-card-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            margin-bottom: 14px;
+            background: rgba(0, 212, 255, 0.08);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            color: var(--accent-cyan);
+            transition: all var(--transition-base);
+        }
+        .skill-card:hover .skill-card-icon {
+            background: rgba(0, 212, 255, 0.15);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+            transform: scale(1.05);
+        }
+        .skill-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+            letter-spacing: -0.3px;
+        }
 
-@media (max-width: 768px) {
-  nav {
-    flex-direction: row;
-    align-items: center;
-  }
-  
-  .profile-container {
-    justify-content: space-between;
-  }
-}
+        /* ===== INTERESTS ===== */
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        .interest-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            text-align: center;
+            transition: all var(--transition-spring);
+            cursor: default;
+        }
+        .interest-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-5px) scale(1.02);
+        }
+        .interest-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: block;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            filter: drop-shadow(0 0 15px rgba(0, 212, 255, 0.2));
+        }
+        .interest-card-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+        }
+        .interest-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+        .contact-card {
+            background: var(--bg-glass);
+            backdrop-filter: blur(20px) saturate(150%);
+            -webkit-backdrop-filter: blur(20px) saturate(150%);
+            border: 1px solid var(--border-glass);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            text-align: center;
+            transition: all var(--transition-spring);
+            text-decoration: none;
+            color: var(--text-primary);
+            display: block;
+        }
+        .contact-card:hover {
+            border-color: var(--border-hover);
+            box-shadow: var(--shadow-glow);
+            transform: translateY(-3px);
+        }
+        .contact-card-icon {
+            font-size: 1.8rem;
+            margin-bottom: 12px;
+            display: block;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: all var(--transition-base);
+        }
+        .contact-card:hover .contact-card-icon {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.4));
+        }
+        .contact-card-title {
+            font-family: var(--font-heading);
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+        .contact-card-value {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            word-break: break-word;
+        }
+        .contact-card-value a {
+            color: var(--accent-cyan);
+            text-decoration: none;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 30px 24px 50px;
+            border-top: 1px solid var(--border-glass);
+            background: rgba(5, 5, 15, 0.5);
+        }
+        .footer-social {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            margin-bottom: 16px;
+        }
+        .footer-social a {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 1px solid var(--border-glass);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all var(--transition-base);
+            font-size: 1rem;
+        }
+        .footer-social a:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.15);
+            transform: translateY(-2px);
+        }
+        .footer-message {
+            font-family: var(--font-heading);
+            font-size: 1.4rem;
+            font-weight: 600;
+            min-height: 1.6em;
+            letter-spacing: 0.5px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 12px;
+            filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.15));
+        }
+        .footer-message .scramble-text {
+            display: inline-block;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            min-width: 28ch;
+        }
+
+        /* ===== COPYRIGHT EN BAS À GAUCHE AVEC ANIMATION CURSOR ===== */
+        .footer-copyright-wrapper {
+            position: fixed;
+            bottom: 16px;
+            left: 24px;
+            z-index: 100;
+            font-size: 0.7rem;
+            color: rgba(148, 163, 184, 0.4);
+            font-family: var(--font-mono);
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            transition: color 0.3s ease;
+        }
+        .footer-copyright-wrapper:hover {
+            color: rgba(148, 163, 184, 0.7);
+        }
+        .footer-copyright-wrapper .cursor-blink {
+            display: inline-block;
+            width: 2px;
+            height: 0.9em;
+            background: var(--accent-cyan);
+            animation: cursorBlink 0.9s steps(2) infinite;
+            box-shadow: 0 0 6px rgba(0, 212, 255, 0.4);
+            opacity: 0.6;
+            margin-left: 2px;
+        }
+        @keyframes cursorBlink {
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0;
+            }
+        }
+
+        /* ===== SCROLL PROGRESS ===== */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 0%;
+            height: 3px;
+            background: var(--accent-gradient);
+            z-index: 1001;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            transition: width 0.1s linear;
+            border-radius: 0 2px 2px 0;
+        }
+
+        /* ===== REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+        }
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.7s var(--ease-out-expo), transform 0.7s var(--ease-out-expo);
+        }
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .stagger-1 {
+            transition-delay: 0.1s;
+        }
+        .stagger-2 {
+            transition-delay: 0.2s;
+        }
+        .stagger-3 {
+            transition-delay: 0.3s;
+        }
+        .stagger-4 {
+            transition-delay: 0.4s;
+        }
+        .stagger-5 {
+            transition-delay: 0.5s;
+        }
+        .stagger-6 {
+            transition-delay: 0.6s;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            .interests-grid {
+                grid-template-columns: 1fr;
+            }
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+            .hero-container {
+                gap: 40px;
+                text-align: center;
+            }
+            .hero-text {
+                text-align: center;
+            }
+            .hero-description {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .hero-greeting {
+                justify-content: center;
+            }
+            .hero-name-wrapper {
+                min-width: unset;
+                width: 100%;
+            }
+            .hero-name-scramble {
+                min-width: unset;
+                width: 100%;
+                text-align: center;
+            }
+            .footer-copyright-wrapper {
+                left: 16px;
+                font-size: 0.6rem;
+            }
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 8px 16px;
+                height: 56px;
+            }
+            .navbar-links {
+                display: none;
+            }
+            .nav-toggle {
+                display: flex;
+            }
+            .navbar-name {
+                font-size: 0.8rem;
+            }
+            .navbar-avatar {
+                width: 34px;
+                height: 34px;
+            }
+            .mobile-menu {
+                top: 56px;
+            }
+            .hero-photo {
+                width: 200px;
+                height: 200px;
+            }
+            .hero-photo-ring {
+                inset: -10px;
+            }
+            .section {
+                padding: 80px 16px 40px;
+            }
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-info-grid {
+                grid-template-columns: 1fr;
+            }
+            .timeline {
+                padding-left: 30px;
+            }
+            .timeline::before {
+                left: 10px;
+            }
+            .timeline-dot {
+                left: -28px;
+                width: 14px;
+                height: 14px;
+                border-width: 2px;
+            }
+            .section-title-wrapper {
+                margin-bottom: 32px;
+            }
+            .section-sub-icon {
+                font-size: 2.6rem;
+            }
+            .footer-message {
+                font-size: 1.1rem;
+            }
+            .hero-name-scramble {
+                font-size: clamp(1.6rem, 4vw, 2.2rem);
+            }
+            .footer-copyright-wrapper {
+                left: 12px;
+                bottom: 12px;
+                font-size: 0.55rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-photo {
+                width: 160px;
+                height: 160px;
+            }
+            .hero-title {
+                font-size: 1.6rem;
+            }
+            .btn {
+                padding: 10px 18px;
+                font-size: 0.85rem;
+            }
+            .glass-card {
+                padding: 18px;
+            }
+            .footer-message {
+                font-size: 1rem;
+            }
+            .hero-name-scramble {
+                font-size: clamp(1.3rem, 3.5vw, 1.6rem);
+                min-width: unset;
+                width: 100%;
+            }
+            .hero-name-wrapper {
+                min-width: unset;
+                width: 100%;
+            }
+            .footer-copyright-wrapper {
+                left: 10px;
+                bottom: 10px;
+                font-size: 0.5rem;
+            }
+        }
     </style>
 </head>
 <body>
-    <div id="particles-js"></div>
 
-    <nav>
-      <div class="profile-container">
-        <!-- Photo en premier -->
-        <div class="profile-circle">
-          <img src="logo-NS.png" alt="Photo de profil">
+    <!-- PRELOADER -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">NS</div>
+            <div class="preloader-bar">
+                <div class="preloader-bar-fill" id="preloaderFill"></div>
+            </div>
         </div>
-        
-        <!-- Nom ensuite -->
-        <div class="profile-name">Nasr-Eddine SARMOUME</div>
-        
-        <!-- Conteneur du menu à droite -->
-        <div class="menu-toggle-container">
-          <!-- Items du menu -->
-          <div class="menu-items" id="menu">
-            <button onclick="scrollToSection('Accueil')">Accueil</button>
-            <button onclick="scrollToSection('Apropos')">À propos</button>
-            <button onclick="scrollToSection('diplomes')">Diplômes</button>
-            <button onclick="scrollToSection('experience')">Expérience pro</button>
-            <button onclick="scrollToSection('Compétences')">Compétences</button>
-            <button onclick="scrollToSection('portfolio')">Centres d'intérêt</button>
-            <button onclick="scrollToSection('contact')">Contact</button>
-          </div>
-          
-          <!-- Bouton menu mobile -->
-          <button class="menu-toggle" id="mobile-menu-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+    </div>
+
+    <!-- SCROLL PROGRESS -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- PARTICLES -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- NAVBAR -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar-left">
+            <div class="navbar-avatar">
+                <img src="logo-NS.png" alt="Logo Nasr-Eddine">
+            </div>
+            <span class="navbar-name">Nasr-Eddine SARMOUME</span>
         </div>
-      </div>
+        <div class="navbar-links" id="navLinks">
+            <button class="nav-link active" data-section="accueil"><i class="fa-solid fa-house"></i> Accueil</button>
+            <button class="nav-link" data-section="apropos"><i class="fa-solid fa-user"></i> À propos</button>
+            <button class="nav-link" data-section="diplomes"><i class="fa-solid fa-graduation-cap"></i> Diplômes</button>
+            <button class="nav-link" data-section="experience"><i class="fa-solid fa-briefcase"></i> Expérience</button>
+            <button class="nav-link" data-section="competences"><i class="fa-solid fa-code"></i> Compétences</button>
+            <button class="nav-link" data-section="interets"><i class="fa-solid fa-heart"></i> Intérêts</button>
+            <button class="nav-link" data-section="contact"><i class="fa-solid fa-envelope"></i> Contact</button>
+        </div>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </nav>
 
-    <section class="scroll-block show" id="Accueil">
-      <div class="block">
-        <div class="home-content">
-          <div class="profile-photo-large">
-            <img src="photo-de-profile.jpg" alt="Photo de profil Nasr Eddine">
-          </div>
-          <div class="home-text-box">
-            <h2 class="title-animate show"><span>B</span><span>o</span><span>n</span><span>j</span><span>o</span><span>u</span><span>r</span> <br> <span>j</span><span>e</span> <span>s</span><span>u</span><span>i</span><span>s</span> <div class="name-animation" id="nameAnimation"></div></h2>
-            <p>   Bienvenue ! 👋<br>
-<br>
-Plutôt qu’un simple CV, j’ai choisi de vous présenter mon parcours autrement.<br>
-Découvrez ici mes expériences, mes compétences, mes projets et les domaines dans lesquels j’ai eu l’occasion d’évoluer.<br><br>
-
-Curieux 🤔? <br>
-Faites un tour 😉.</p>
-            <a href="#Apropos" class="btn"> À propos de moi</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scroll-block" id="Apropos">
-      <div class="block">
-        <h2 class="section-title title-animate"><span>À</span> <span>p</span><span>r</span><span>o</span><span>p</span><span>o</span><span>s</span> <span>d</span><span>e</span> <span>m</span><span>o</span><span>i</span> <span>:</span></h2>
-
-        <p>Mon domaine de compétences est vaste, j'ai travaillé dans différents secteurs, qu'il s'agisse de l'informatique, Gestionnaire Back Office litige carte chez AVEM, manager chez carrefour Market, manager d'inventaires, en laboratoire d'analyses médicales ou agroalimentaires.<br>
-          Ces diverses expériences m'ont permis d'acquérir certaines connaissances et autonomie dans beaucoup de secteur d'activité et aussi l'occasion de développer mes capacités d'adaptation et ma polyvalence. <br> Avisé, Rigoureux, Volontaire et possédant un très bon esprit d'équipe, je peux apporter à votre entreprise mes compétences obtenues au cours de ces années.</p>
-        <br>
-        <br>
-        <div class="grid grid--2--col">
-          <div class="data">
-            <div class="grid grid--2--col">
-              <div class="details-box">
-                <p><strong>Date de naissance:</strong></p>
-                <p>20 Août, 1988</p>
-              </div>
-              <div class="details-box">
-                <p><strong>Age:</strong></p>
-                <p>38 Ans</p>
-              </div>
-              <div class="details-box">
-                <p><strong>Website:</strong></p>
-                <p><a href="#">Cliquez ici</a></p>
-              </div>
-              <div class="details-box">
-                <p><strong>Email:</strong></p>
-                <p><a href="mailto:nasreddine_88@hotmail.com">nasr*********@hotmail.com</a></p>
-              </div>    
-              <div class="details-box">
-                <p><strong>Portable:</strong></p>
-                <p><a href="tel:+33758214738">+33758******</a></p>
-              </div>
-              <div class="details-box">
-                <p><strong>Ville:</strong></p>
-                <p>Cournon D'auvergne, Auvergne-Rhône-Alpes, France</p>
-              </div>              
-            </div>
-         
-            <div class="details-box"
-            href="#contact" class="btn">Contactez moi
-            </div>
-          </div>
-          <div class="skill">
-            <div class="details-box">
-              <h3>Langues</h3>
-            </div>
-            <div class="details-box">
-              <p>Français</p>
-              <div class="skill-bar"><span style="width: 95%;"></span></div>
-            </div>
-            <div class="details-box">
-              <p>Arabe</p>
-              <div class="skill-bar"><span style="width: 99%;"></span></div>
-            </div>
-            <div class="details-box">
-              <p>Anglais</p>
-              <div class="skill-bar"><span style="width: 92%;"></span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scroll-block" id="diplomes">
-      <div class="block">
-        <h2 class="section-title title-animate"><span>D</span><span>i</span><span>p</span><span>l</span><span>ô</span><span>m</span><span>e</span><span>s</span> <span>e</span><span>t</span> <span>F</span><span>o</span><span>r</span><span>m</span><span>a</span><span>t</span><span>i</span><span>o</span><span>n</span><span>s</span></h2>
-        <div class="details">
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>2023</p>
-            </div>
-            <h4>CERTIFICAT DE REUSSITE</h4>
-            <p>De Juillet 2023 à Aout 2023<br>
-              OpenClassrooms, et Mind Luster Développement web, Comprendre le web.<br>Créez votre site web avec HTML5 et CSS3, JavaScript.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>2016</p>
-            </div>
-            <h4>L2 LICENCE ANGLAIS (BAC+2)</h4>
-            <p>De septembre 2015 à mai 2016<br>
-              Université BLAISE PASCAL Clermont-Ferrand.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>2015</p>
-            </div>
-            <h4>LICENCE EN LANGUE FRANCAISE (BAC+3 après validation)</h4>
-            <p>De septembre 2012 à juin 2015<br>
-              L'Université DJILALI BOUNAAMA de Khemis Meliana Algérie.<br>
-              Lettres et langues étrangères.<br> Validé en France le 19/06/2023 par Enic Naric (équivalant licence en didactique du français langue étrangère).<br>
-              Filière : langue Française.<br>
-              Spécialité : didactique du français langue étrangère.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>2012</p>
-            </div>
-            <h4>DROIT ET SCIENCES JURIDIQUES (BAC+1)</h4>
-            <p>De septembre 2011 à juin 2012<br>
-              Le Centre Universitaire de Tissemsilet Algérie.<br> Branche : Droit.<br> Spécialité : Etat et institutions.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>2011</p>
-            </div>
-            <h4>LABORANTIN EN MICROBIOLOGIE (BTS : BAC+2 après validation)</h4>
-            <p>De septembre 2008 à juin 2011<br>
-              L'Institut National Spécialisé en Microbiologie de Blida Algérie.<br>
-              Validé en France le 13/02/2018 par Enic Naric (équivalant BTS contrôle de qualité, biologie, chimie).<br>
-              Filière : biologie, microbiologie (Contrôle de qualité).<br>
-              Spécialité : biologie, microbiologie.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scroll-block" id="experience">
-      <div class="block">
-        <h2 class="section-title title-animate"><span>E</span><span>x</span><span>p</span><span>é</span><span>r</span><span>i</span><span>e</span><span>n</span><span>c</span><span>e</span><span>s</span> <span>p</span><span>r</span><span>o</span><span>f</span><span>e</span><span>s</span><span>s</span><span>i</span><span>o</span><span>n</span><span>n</span><span>e</span><span>l</span><span>l</span><span>e</span><span>s</span></h2>
-        <div class="details">
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Depuis Janvier - 2024</p>
-            </div>
-            <h4>GESTIONNAIRE BACK OFFICE LITIGE CARTE</h4>
-            <p>AVEM, Clermont Ferrand<br>
-              Contrôler les dossiers transmis par les banques clientes.<br>
-              Vérifier la confirmité et la complétude du dossier.<br>
-              Collecter les éléments complémentaires nécessaires.<br>
-              Instruire le dossier et traiter les demandes.<br>
-              Vérifier la recevabilité des demandes.<br>
-              Emettre, le cas échéant, les opérations bancaires de dénouement.<br>
-              Renseigner les demandeurs, les banques et caisses regionales.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Septembre - Octobre 2023</p>
-            </div>
-            <h4>CHARGE DE QUALITE OPERATIONNELLE</h4>
-            <p>Movianto, Cournon d'auvergne<br>
-              Entrer les donnees en base de donnees interne de l'entreprise.<br>
-              Préparation logistique des colis VIATRIS de pélevements pharmaceutiques internationnaux et locaux.<br>
-              Réalisation des prélèvement qualitatifs pharmaceutiques (DMF) selon le cahier de charge.<br>
-              Gérer les stocks de service qualité sur FlexFlow.<br>
-              Analyser la conformité des documentations de lots par rapport aux dossiers d'autorisation de mise sur le marché en vue de la commercialisation des produits et les envoyer au laboratoire.<br>
-              Collecte et analyse des résultat de conditions de transport (data logger, température...)</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Juin - Août 2023</p>
-            </div>
-            <h4>MANAGER NIVEAU V (Area Manager)</h4>
-            <p>Carrefour Market, Riom<br>
-              Formation caroline, portail market et les différents logiciels de carrefour market (Carla, Game, Pricer, Caromobile, Adiplan, Syster...).<br>
-              Gérer le stock et manager les équipe sur les différentes tâches;<br>
-              Mise en rayons, déstockage et la rotation.<br>
-              Implantation des rayons.<br>
-              Manutention avec le gerbeur et transpalette.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Novembre 2018 - Juin 2023</p>
-            </div>
-            <h4>MANAGER D'INVENTAIRE GRANDES SURFACES</h4>
-            <p>RGIS SPÉCIALISTES EN INVENTAIRE, Clermont Ferrand<br>
-              Déplacement sur les lieux de missions (la nuit).<br>
-              Manager les équipes.<br> Responsable d'inventaire (superviseur).<br> 
-              Intégration et formation des nouveaux compteurs.<br>
-              Encadrement, Evaluation et suivi des compteurs.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Septembre 2017 - Novembre 2018</p>
-            </div>
-            <h4>EMPLOYÉ DE LABORATOIRE QUALITÉ</h4>
-            <p>Limagrain, Ennezat<br>
-              Contrat saisonnier 09/2017-11/2017 et 09/18 -11/18<br>
-              Préparation des plaques de PCR (tournesol, mais).<br>
-              Tests Tétrazolium. Tests PMG.<br> Préparation des semis aux champs.<br>
-              Vigueurs Dormance. Cinétiques.<br>
-              Utilisation du LIMS (logiciels internes).</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Mai 2012 - Août 2015</p>
-            </div>
-            <h4>TECHNICIEN DE LABORATOIRE D'ANALYSES MÉDICALES</h4>
-            <p>ÉTABLISSEMENT HOSPITALIER PUBLIC Theniet el had Algerie<br>
-              PRÉLÈVEMENTS : Bactériologiques, hématologiques.<br>
-              ANALYSES :<br>
-              Bactériologiques : (ECBU,ECB des sels, ECB des pertes...).<br>
-              Hématologiques : (FNS, CRP, VS, GS...).<br>
-              Biochimiques : (Urée, Créatinine, TP, LCR ...).<br> Sérologie:(Hiv, Hépatite B et C, BW...).<br> Séparations des poches de sang et transfusion.<br>
-              INJECTIONS :<br> Intraveineuses, Intramusculaires, Sous cutanées. Perfusions.</p>
-          </div>
-          <div class="details-box">
-            <div class="year">
-              <i class="fa-solid fa-calendar-days icon"></i>
-              <p>Avril 2012 - Août 2015</p>
-            </div>
-            <h4>GESTION RÉSEAU ET MAINTENANCE INFORMATIQUE DANS UN CYBERCAFÉ (GÉRANT)</h4>
-            <p>CYBER REGINA Theniet el had Algérie<br>
-              Formatage (software): Windows, Mac, logiciels de base (packoffice, word, excel ....).<br>
-              Réparation (Hardware) : CPU, RAM, carte graphique, ventilateurs... .<br>
-              Récupération de données perdues.<br>
-              Installation du réseau interne (Easycafe Tinasoft).</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scroll-block" id="Compétences">
-      <div class="block">
-        <h2 class="section-title title-animate"><span>C</span><span>o</span><span>m</span><span>p</span><span>é</span><span>t</span><span>e</span><span>n</span><span>c</span><span>e</span><span>s</span></h2>
-        <div class="grid grid--3--col">
-          <div class="service-box">
-            <div class="icon-box">
-              <i class="fa-solid fa-code icon"></i>
-            </div>
-            <h4>Front-End Development</h4>
-            <div class="details-box">
-              <h3>&lt;/HTML&gt;</h3>
-              <div class="skill-bar"><span style="width: 30%;"></span></div>
-            </div>
-            <div class="details-box">
-              <h3>{ CSS; }</h3>
-              <div class="skill-bar"><span style="width: 30%;"></span></div>
-            </div>
-            <div class="details-box">
-              <h3>("JAVASCRIPT");</h3>
-              <div class="skill-bar"><span style="width: 15%;"></span></div>
-            </div> 
-            <div class="details-box">
-              <h3>Github</h3>
-              <div class="skill-bar"><span style="width: 40%;"></span></div>
-            </div>
-            <p>Des bases, et en cours d'apprentissage.</p>
-          </div>
-          <div class="service-box">
-            <div class="icon-box">
-              <i class="fa-solid fa-palette icon"></i>
-            </div>
-            <h4>Applications et services</h4>
-            <div class="details-box">
-              <h3>Photoshop</h3>
-              <div class="skill-bar"><span style="width: 50%;"></span></div>
-            </div>
-            <div class="details-box">
-              <h3>Microsoft Office</h3>
-              <div class="skill-bar"><span style="width: 60%;"></span></div>
-            </div>
-            <p>Bonne maitrise de Word, Excel, Powerpoint....et intermédiaire en Photoshop.</p>
-          </div>
-          <div class="service-box">
-            <div class="icon-box">
-              <i class="fa-solid fa-cubes icon"></i>
-            </div>
-            <h3>Autres compétences</h3>
-            <div class="details-box">
-              <h3>Bonne maîtrise de :</h3>
-              <div class="skill-bar"><span style="width: 75%;"></span></div>
-              <p>Management, Vente.<br>
-                IA, TIM, ACS, GDR, Netsize, RGIS Ngen, Winbase.<br> LIMS.<br> Carrefour Caroline, Portail Market,<br> Laboratoire
-                (microbiologie, chimie).</p>
-            </div>
-          </div>
-        </div>      
-      </div>
-    </section>
-
-    <section class="scroll-block" id="portfolio">
-      <div class="block">
-        <h2 class="section-title title-animate"><span>C</span><span>e</span><span>n</span><span>t</span><span>r</span><span>e</span><span>s</span> <span>d</span><span>'</span><span>i</span><span>n</span><span>t</span><span>é</span><span>r</span><span>e</span><span>t</span><span>s</span></h2>
-        <div class="grid grid--3--col">
-          <div class="service-box">
-            <div class="icon-box">
-              <i class="fa-solid fa-earth-americas icon"></i>
-            </div>
-            <h3>Hobbies</h3>
-            <p>Lecture, Voyage.<br> Sport
-              Gymnastique
-              (Tumbling), Basket-ball,<br>
-              Football.</p>
-          </div>
-          <div class="service-box">
-            <div class="icon-box">
-              <i class="fa-solid fa-music icon"></i>
-            </div>
-            <h3>Musique</h3>
-            <p>Guitare<br> Piano</p>
-          </div>
-          <div class="service-box">
-            <div class="icon-box">
-              <i class="fa-solid fa-laptop-code icon"></i>
-            </div>
-            <h3>Technologie</h3>
-            <p>Développement web<br> Design<br> Nouvelles technologies</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="scroll-block" id="contact">
-      <div class="block">
-        <h2 class="section-title title-animate"><span>C</span><span>o</span><span>n</span><span>t</span><span>a</span><span>c</span><span>t</span></h2>
-        <div class="details-box">
-          <h4>Des questions ?</h4>
-          <p>Je suis à votre service</p>
-        </div>
-        <div class="grid grid--4--col">
-          <div class="service-box">
-            <i class="fa-solid fa-phone icon"></i>
-            <h4>Appelez moi</h4>
-            <a href="tel:+33758214738">+33758******</a>
-          </div>
-          <div class="service-box">
-            <i class="fa-solid fa-location-dot icon"></i>
-            <h4>Adresse</h4>
-            <p>le Cendre auvergne Rhône-Alpes 63760 France.</p>
-          </div>
-          <div class="service-box">
-            <i class="fa-solid fa-envelope icon"></i>
-            <h4>Email</h4>
-            <a href="mailto:nasreddine_88@hotmail.com">nasr*********@hotmail.com</a>
-          </div>
-          <div class="service-box">
-            <i class="fa-solid fa-globe icon"></i>
-            <h4>Website</h4>
-            <a href="#">Cliquez ici</a>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <div class="thank-you-block">
-      <div class="thank-you-content">
-        <h4 class="thank-you-text">Merci de votre visite</h4>
-      </div>
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="nav-link active" data-section="accueil" onclick="navigateTo('accueil')"><i class="fa-solid fa-house"></i> Accueil</button>
+        <button class="nav-link" data-section="apropos" onclick="navigateTo('apropos')"><i class="fa-solid fa-user"></i> À propos</button>
+        <button class="nav-link" data-section="diplomes" onclick="navigateTo('diplomes')"><i class="fa-solid fa-graduation-cap"></i> Diplômes</button>
+        <button class="nav-link" data-section="experience" onclick="navigateTo('experience')"><i class="fa-solid fa-briefcase"></i> Expérience</button>
+        <button class="nav-link" data-section="competences" onclick="navigateTo('competences')"><i class="fa-solid fa-code"></i> Compétences</button>
+        <button class="nav-link" data-section="interets" onclick="navigateTo('interets')"><i class="fa-solid fa-heart"></i> Intérêts</button>
+        <button class="nav-link" data-section="contact" onclick="navigateTo('contact')"><i class="fa-solid fa-envelope"></i> Contact</button>
     </div>
- <!-- Particles.js -->
-    <script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+    <!-- HERO / ACCUEIL -->
+    <section class="section visible" id="accueil" style="opacity:1; transform:none;">
+        <div class="hero-container">
+            <div class="hero-photo-wrapper">
+                <div class="hero-photo-ring"></div>
+                <div class="hero-photo">
+                    <img src="photo-de-profile.jpg" alt="Photo de profil Nasr Eddine">
+                </div>
+            </div>
+            <div class="hero-text">
+                <div class="hero-greeting">Bonjour, je suis</div>
+                <h1 class="hero-title">
+                    <span class="hero-name-wrapper">
+                        <span class="hero-name-scramble" id="heroName">Nasr-Eddine SARMOUME</span>
+                    </span>
+                </h1>
+                <p class="hero-description">
+                    Bienvenue ! 👋<br><br>
+                    Plutôt qu'un simple CV, j'ai choisi de vous présenter mon parcours autrement.<br>
+                    Découvrez ici mes expériences, mes compétences, mes projets et les domaines dans lesquels j'ai eu l'occasion d'évoluer.<br><br>
+                    Curieux 🤔 ? Faites un tour 😉.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#apropos" class="btn btn-primary" onclick="navigateTo('apropos')">
+                        <i class="fa-solid fa-arrow-down"></i> À propos de moi
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- À PROPOS -->
+    <section class="section" id="apropos">
+        <div class="section-inner">
+            <div class="section-title-wrapper">
+                <div class="section-sub-icon"><i class="fa-solid fa-user"></i></div>
+                <h2 class="section-title">À propos de moi</h2>
+            </div>
+            <div class="about-grid">
+                <div class="reveal-left">
+                    <div class="glass-card" style="height:100%; display:flex; flex-direction:column; justify-content:center;">
+                        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.8;">
+                            Mon domaine de compétences est vaste, j'ai travaillé dans différents secteurs, qu'il s'agisse de l'informatique,
+                            Gestionnaire Back Office litige carte chez AVEM, manager chez Carrefour Market, manager d'inventaires,
+                            en laboratoire d'analyses médicales ou agroalimentaires.<br><br>
+                            Ces diverses expériences m'ont permis d'acquérir certaines connaissances et autonomie dans beaucoup de secteurs
+                            d'activité et aussi l'occasion de développer mes capacités d'adaptation et ma polyvalence.<br><br>
+                            <strong style="color:var(--text-primary);">Avisé, Rigoureux, Volontaire</strong> et possédant un très bon esprit d'équipe,
+                            je peux apporter à votre entreprise mes compétences obtenues au cours de ces années.
+                        </p>
+                    </div>
+                </div>
+                <div class="reveal-right">
+                    <div class="glass-card">
+                        <h3 style="font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--accent-cyan);">
+                            <i class="fa-solid fa-id-card" style="margin-right:8px;"></i>Informations
+                        </h3>
+                        <div class="about-info-grid">
+                            <div class="info-item">
+                                <div class="info-item-label">Date de naissance</div>
+                                <div class="info-item-value">20 Août 1988</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Âge</div>
+                                <div class="info-item-value">38 Ans</div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Email</div>
+                                <div class="info-item-value"><a href="mailto:nasreddine_88@hotmail.com">nasr*********@hotmail.com</a></div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-item-label">Téléphone</div>
+                                <div class="info-item-value"><a href="tel:+33758214738">+33758******</a></div>
+                            </div>
+                            <div class="info-item" style="grid-column: span 2;">
+                                <div class="info-item-label">Ville</div>
+                                <div class="info-item-value">Cournon d'Auvergne, Auvergne-Rhône-Alpes, France</div>
+                            </div>
+                        </div>
+                        <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border-glass);">
+                            <h3 style="font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--accent-cyan);">
+                                <i class="fa-solid fa-language" style="margin-right:8px;"></i>Langues
+                            </h3>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-header">
+                                    <span class="skill-bar-name">Français</span>
+                                    <span class="skill-bar-percent"></span>
+                                </div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill" data-width="95" data-delay="0"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-header">
+                                    <span class="skill-bar-name">Arabe</span>
+                                    <span class="skill-bar-percent"></span>
+                                </div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill" data-width="99" data-delay="100"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar-container">
+                                <div class="skill-bar-header">
+                                    <span class="skill-bar-name">Anglais</span>
+                                    <span class="skill-bar-percent"></span>
+                                </div>
+                                <div class="skill-bar-track">
+                                    <div class="skill-bar-fill" data-width="92" data-delay="200"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DIPLÔMES -->
+    <section class="section" id="diplomes">
+        <div class="section-inner">
+            <div class="section-title-wrapper">
+                <div class="section-sub-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                <h2 class="section-title">Diplômes &amp; Formations</h2>
+            </div>
+            <div class="glass-card">
+                <div class="timeline">
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2023</div>
+                        <div class="timeline-title">Certificat de réussite</div>
+                        <div class="timeline-company">OpenClassrooms &amp; Mind Luster</div>
+                        <div class="timeline-description">
+                            De Juillet 2023 à Août 2023 — Développement web, Comprendre le web.
+                            Créez votre site web avec HTML5 et CSS3, JavaScript.
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2016</div>
+                        <div class="timeline-title">L2 Licence Anglais (BAC+2)</div>
+                        <div class="timeline-company">Université Blaise Pascal, Clermont-Ferrand</div>
+                        <div class="timeline-description">De septembre 2015 à mai 2016</div>
+                    </div>
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2015</div>
+                        <div class="timeline-title">Licence en Langue Française (BAC+3)</div>
+                        <div class="timeline-company">Université Djilali Bounaama, Khemis Meliana, Algérie</div>
+                        <div class="timeline-description">
+                            De septembre 2012 à juin 2015 — Lettres et langues étrangères.<br>
+                            Validé en France le 19/06/2023 par Enic Naric (équivalent licence en didactique du français langue étrangère).<br>
+                            Filière : langue Française. Spécialité : didactique du français langue étrangère.
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2012</div>
+                        <div class="timeline-title">Droit et Sciences Juridiques (BAC+1)</div>
+                        <div class="timeline-company">Centre Universitaire de Tissemsilet, Algérie</div>
+                        <div class="timeline-description">De septembre 2011 à juin 2012 — Branche : Droit. Spécialité : État et institutions.</div>
+                    </div>
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2011</div>
+                        <div class="timeline-title">Laborantin en Microbiologie (BTS : BAC+2)</div>
+                        <div class="timeline-company">Institut National Spécialisé en Microbiologie, Blida, Algérie</div>
+                        <div class="timeline-description">
+                            De septembre 2008 à juin 2011 — Validé en France le 13/02/2018 par Enic Naric
+                            (équivalent BTS contrôle de qualité, biologie, chimie).<br>
+                            Filière : biologie, microbiologie (Contrôle de qualité). Spécialité : biologie, microbiologie.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EXPÉRIENCE -->
+    <section class="section" id="experience">
+        <div class="section-inner">
+            <div class="section-title-wrapper">
+                <div class="section-sub-icon"><i class="fa-solid fa-briefcase"></i></div>
+                <h2 class="section-title">Expériences professionnelles</h2>
+            </div>
+            <div class="glass-card">
+                <div class="timeline">
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Depuis Janvier 2024</div>
+                        <div class="timeline-title">Gestionnaire Back Office Litige Carte</div>
+                        <div class="timeline-company">AVEM, Clermont-Ferrand</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Contrôler les dossiers transmis par les banques clientes</li>
+                                <li>Vérifier la conformité et la complétude du dossier</li>
+                                <li>Collecter les éléments complémentaires nécessaires</li>
+                                <li>Instruire le dossier et traiter les demandes</li>
+                                <li>Vérifier la recevabilité des demandes</li>
+                                <li>Émettre les opérations bancaires de dénouement</li>
+                                <li>Renseigner les demandeurs, les banques et caisses régionales</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Septembre - Octobre 2023</div>
+                        <div class="timeline-title">Chargé de Qualité Opérationnelle</div>
+                        <div class="timeline-company">Movianto, Cournon d'Auvergne</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Entrer les données en base interne de l'entreprise</li>
+                                <li>Préparation logistique des colis VIATRIS de prélèvements pharmaceutiques</li>
+                                <li>Réalisation des prélèvements qualitatifs pharmaceutiques (DMF)</li>
+                                <li>Gérer les stocks de service qualité sur FlexFlow</li>
+                                <li>Analyser la conformité des documentations de lots</li>
+                                <li>Collecte et analyse des résultats de conditions de transport</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Juin - Août 2023</div>
+                        <div class="timeline-title">Manager Niveau V (Area Manager)</div>
+                        <div class="timeline-company">Carrefour Market, Riom</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Formation Caroline, Portail Market et logiciels Carrefour Market (Carla, Game, Pricer, Caromobile, Adiplan, Syster...)</li>
+                                <li>Gérer le stock et manager les équipes sur les différentes tâches</li>
+                                <li>Mise en rayons, déstockage et rotation</li>
+                                <li>Implantation des rayons</li>
+                                <li>Manutention avec gerbeur et transpalette</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Novembre 2018 - Juin 2023</div>
+                        <div class="timeline-title">Manager d'Inventaire Grandes Surfaces</div>
+                        <div class="timeline-company">RGIS Spécialistes en Inventaire, Clermont-Ferrand</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Déplacement sur les lieux de missions (la nuit)</li>
+                                <li>Manager les équipes</li>
+                                <li>Responsable d'inventaire (superviseur)</li>
+                                <li>Intégration et formation des nouveaux compteurs</li>
+                                <li>Encadrement, évaluation et suivi des compteurs</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Septembre 2017 - Novembre 2018</div>
+                        <div class="timeline-title">Employé de Laboratoire Qualité</div>
+                        <div class="timeline-company">Limagrain, Ennezat</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Contrat saisonnier 09/2017-11/2017 et 09/18-11/18</li>
+                                <li>Préparation des plaques de PCR (tournesol, maïs)</li>
+                                <li>Tests Tétrazolium, Tests PMG</li>
+                                <li>Préparation des semis aux champs</li>
+                                <li>Vigueurs Dormance, Cinétiques</li>
+                                <li>Utilisation du LIMS (logiciels internes)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-right">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Mai 2012 - Août 2015</div>
+                        <div class="timeline-title">Technicien de Laboratoire d'Analyses Médicales</div>
+                        <div class="timeline-company">Établissement Hospitalier Public, Theniet el Had, Algérie</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Prélèvements : bactériologiques, hématologiques</li>
+                                <li>Analyses bactériologiques (ECBU, ECB des sels, ECB des pertes...)</li>
+                                <li>Analyses hématologiques (FNS, CRP, VS, GS...)</li>
+                                <li>Analyses biochimiques (Urée, Créatinine, TP, LCR...)</li>
+                                <li>Sérologie (HIV, Hépatite B et C, BW...)</li>
+                                <li>Séparations des poches de sang et transfusion</li>
+                                <li>Injections : intraveineuses, intramusculaires, sous-cutanées, perfusions</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="timeline-item reveal-left">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Avril 2012 - Août 2015</div>
+                        <div class="timeline-title">Gestion Réseau et Maintenance Informatique (Gérant)</div>
+                        <div class="timeline-company">Cyber Regina, Theniet el Had, Algérie</div>
+                        <div class="timeline-description">
+                            <ul>
+                                <li>Formatage (software) : Windows, Mac, logiciels de base (Pack Office, Word, Excel...)</li>
+                                <li>Réparation (hardware) : CPU, RAM, carte graphique, ventilateurs...</li>
+                                <li>Récupération de données perdues</li>
+                                <li>Installation du réseau interne (Easycafe Tinasoft)</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMPÉTENCES -->
+    <section class="section" id="competences">
+        <div class="section-inner">
+            <div class="section-title-wrapper">
+                <div class="section-sub-icon"><i class="fa-solid fa-code"></i></div>
+                <h2 class="section-title">Compétences</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card reveal stagger-1">
+                    <div class="skill-card-icon"><i class="fa-solid fa-code"></i></div>
+                    <div class="skill-card-title">Front-End Development</div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">HTML</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="30" data-delay="0"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">CSS</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="30" data-delay="100"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">JavaScript</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="15" data-delay="200"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">GitHub</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="40" data-delay="300"></div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:12px; font-style:italic;">
+                        Des bases solides, en cours d'apprentissage continu.
+                    </p>
+                </div>
+
+                <div class="skill-card reveal stagger-2">
+                    <div class="skill-card-icon"><i class="fa-solid fa-palette"></i></div>
+                    <div class="skill-card-title">Applications &amp; Services</div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">Photoshop</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="50" data-delay="0"></div>
+                        </div>
+                    </div>
+                    <div class="skill-bar-container">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">Microsoft Office</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="60" data-delay="100"></div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:12px;">
+                        Bonne maîtrise de Word, Excel, PowerPoint... et niveau intermédiaire en Photoshop.
+                    </p>
+                </div>
+
+                <div class="skill-card reveal stagger-3">
+                    <div class="skill-card-icon"><i class="fa-solid fa-cubes"></i></div>
+                    <div class="skill-card-title">Autres Compétences</div>
+                    <div class="skill-bar-container" style="margin-bottom:4px;">
+                        <div class="skill-bar-header">
+                            <span class="skill-bar-name">Compétences transversales</span>
+                            <span class="skill-bar-percent"></span>
+                        </div>
+                        <div class="skill-bar-track">
+                            <div class="skill-bar-fill" data-width="70" data-delay="0"></div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:14px; line-height:1.6;">
+                        <strong style="color:var(--text-primary);">Management &amp; Vente</strong> · 
+                        <strong style="color:var(--text-primary);">Outils métiers</strong> (IA, TIM, ACS, GDR, Netsize, RGIS Ngen, Winbase, LIMS) · 
+                        <strong style="color:var(--text-primary);">Carrefour</strong> (Caroline, Portail Market) · 
+                        Laboratoire (microbiologie, chimie), gestion de stock, encadrement d'équipe.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTÉRÊTS -->
+    <section class="section" id="interets">
+        <div class="section-inner">
+            <div class="section-title-wrapper">
+                <div class="section-sub-icon"><i class="fa-solid fa-heart"></i></div>
+                <h2 class="section-title">Centres d'intérêt</h2>
+            </div>
+            <div class="interests-grid">
+                <div class="interest-card reveal stagger-1">
+                    <i class="fa-solid fa-earth-americas interest-card-icon"></i>
+                    <div class="interest-card-title">Hobbies</div>
+                    <p>
+                        Lecture, Voyage.<br>
+                        Sport : Gymnastique (Tumbling),<br>
+                        Basket-ball, Football.
+                    </p>
+                </div>
+                <div class="interest-card reveal stagger-2">
+                    <i class="fa-solid fa-music interest-card-icon"></i>
+                    <div class="interest-card-title">Musique</div>
+                    <p>
+                        Guitare<br>
+                        Piano
+                    </p>
+                </div>
+                <div class="interest-card reveal stagger-3">
+                    <i class="fa-solid fa-laptop-code interest-card-icon"></i>
+                    <div class="interest-card-title">Technologie</div>
+                    <p>
+                        Développement web<br>
+                        Design<br>
+                        Nouvelles technologies
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+        <div class="section-inner">
+            <div class="section-title-wrapper">
+                <div class="section-sub-icon"><i class="fa-solid fa-envelope"></i></div>
+                <h2 class="section-title">Me contacter</h2>
+            </div>
+            <div class="contact-grid">
+                <a href="tel:+33758214738" class="contact-card reveal stagger-1">
+                    <i class="fa-solid fa-phone contact-card-icon"></i>
+                    <div class="contact-card-title">Téléphone</div>
+                    <div class="contact-card-value">+33758******</div>
+                </a>
+                <a href="mailto:nasreddine_88@hotmail.com" class="contact-card reveal stagger-2">
+                    <i class="fa-solid fa-envelope contact-card-icon"></i>
+                    <div class="contact-card-title">Email</div>
+                    <div class="contact-card-value">nasr*********@hotmail.com</div>
+                </a>
+                <div class="contact-card reveal stagger-3">
+                    <i class="fa-solid fa-location-dot contact-card-icon"></i>
+                    <div class="contact-card-title">Adresse</div>
+                    <div class="contact-card-value">Le Cendre, Auvergne-Rhône-Alpes, 63760 France</div>
+                </div>
+                <div class="contact-card reveal stagger-4">
+                    <i class="fa-solid fa-globe contact-card-icon"></i>
+                    <div class="contact-card-title">Website</div>
+                    <div class="contact-card-value"><a href="#" style="color:var(--accent-cyan); text-decoration:none;">Cliquez ici</a></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="footer-social">
+            <a href="https://www.linkedin.com/in/nasreddine-sarmoume/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://github.com/Nasreddine88" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:nasreddine_88@hotmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+        <div class="footer-message">
+            <span class="scramble-text" id="footerScramble"> Merci de votre visite </span>
+        </div>
+    </footer>
+
+    <!-- COPYRIGHT EN BAS À GAUCHE AVEC CURSEUR -->
+    <div class="footer-copyright-wrapper">
+        <span>© 2026 Nasr-Eddine SARMOUME — Tous droits réservés</span>
+        <span class="cursor-blink"></span>
+    </div>
+
     <script>
-      particlesJS('particles-js', {
-        particles: {
-          number: {
-            value: 100,
-            density: { enable: true, value_area: 800 }
-          },
-          color: { value: '#00d4ff' },
-          shape: {
-            type: 'polygon',
-            polygon: {
-              nb_sides: 6
+        (function() {
+            'use strict';
+
+            // ========== PRELOADER ==========
+            const preloader = document.getElementById('preloader');
+            const preloaderFill = document.getElementById('preloaderFill');
+            let loadProgress = 0;
+            const preloadInterval = setInterval(() => {
+                loadProgress += Math.random() * 18 + 4;
+                if (loadProgress >= 100) {
+                    loadProgress = 100;
+                    clearInterval(preloadInterval);
+                    setTimeout(() => {
+                        preloader.classList.add('hidden');
+                    }, 300);
+                }
+                preloaderFill.style.width = Math.min(loadProgress, 100) + '%';
+            }, 120);
+
+            // ========== SCRAMBLE TEXT UTILITY ==========
+            function scrambleTextElement(element, text, duration, callback) {
+                const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
+                const originalText = text;
+                const totalLength = originalText.length;
+                let progress = 0;
+                const interval = 25;
+                const totalSteps = Math.max(1, duration / interval);
+
+                if (element._scrambleTimeout) {
+                    clearTimeout(element._scrambleTimeout);
+                }
+                if (element._scrambleInterval) {
+                    clearInterval(element._scrambleInterval);
+                }
+
+                const scrambleInterval = setInterval(() => {
+                    progress++;
+                    let result = '';
+                    const revealCount = Math.min(Math.floor((progress / totalSteps) * totalLength), totalLength);
+
+                    for (let i = 0; i < totalLength; i++) {
+                        if (i < revealCount) {
+                            result += originalText[i];
+                        } else {
+                            result += chars[Math.floor(Math.random() * chars.length)];
+                        }
+                    }
+                    while (result.length < totalLength) {
+                        result += ' ';
+                    }
+                    element.textContent = result;
+
+                    if (progress >= totalSteps) {
+                        clearInterval(scrambleInterval);
+                        element.textContent = originalText;
+                        if (callback) callback();
+                    }
+                }, interval);
+
+                element._scrambleInterval = scrambleInterval;
             }
-          },
-          opacity: { value: 0.5 },
-          size: { value: 3 },
-          line_linked: {
-            enable: true,
-            distance: 100,
-            color: '#00d4ff',
-            opacity: 0.4,
-            width: 1
-          },
-          move: {
-            enable: true,
-            speed: 0.6
-          }
-        },
-        interactivity: {
-          events: {
-            onhover: { enable: true, mode: 'grab' }
-          }
-        }
-      });
 
-      // Scroll + Navigation JS
-      const sections = document.querySelectorAll('.scroll-block');
-      const detailsBoxes = document.querySelectorAll('.details-box');
-      const titleAnimates = document.querySelectorAll('.title-animate');
-
-      function handleScroll() {
-        const triggerBottom = window.innerHeight * 0.8;
-        
-        // Animation for sections
-        sections.forEach(section => {
-          const rect = section.getBoundingClientRect();
-          if (rect.top < triggerBottom) {
-            section.classList.add('show');
-          }
-        });
-        
-        // Animation for details boxes
-        detailsBoxes.forEach((box, index) => {
-          const rect = box.getBoundingClientRect();
-          if (rect.top < triggerBottom) {
-            setTimeout(() => {
-              box.classList.add('show');
-            }, index * 100);
-          }
-        });
-        
-        // Animation for title letters
-        titleAnimates.forEach(title => {
-          const rect = title.getBoundingClientRect();
-          if (rect.top < triggerBottom && !title.classList.contains('show')) {
-            title.classList.add('show');
-            const letters = title.querySelectorAll('span');
-            letters.forEach((letter, index) => {
-              setTimeout(() => {
-                letter.style.opacity = '1';
-                letter.style.transform = 'translateY(0)';
-              }, index * 50);
-            });
-          }
-        });
-      }
-
-      function scrollToSection(id) {
-        const section = document.getElementById(id);
-        if (section) {
-          section.scrollIntoView({ behavior: 'smooth' });
-          const menu = document.getElementById('menu');
-          if (window.innerWidth <= 992) {
-            menu.classList.remove('show');
-          }
-        }
-      }
-
-      function toggleMenu() {
-        const menu = document.getElementById('menu');
-        menu.classList.toggle('show');
-      }
-
-      window.addEventListener('scroll', handleScroll);
-      window.addEventListener('load', handleScroll);
-      
-      // Initialize animations on load
-      document.addEventListener('DOMContentLoaded', () => {
-        // Split title letters into spans for animation
-        titleAnimates.forEach(title => {
-          if (!title.querySelector('span')) {
-            const text = title.textContent;
-            title.textContent = '';
-            for (let i = 0; i < text.length; i++) {
-              const span = document.createElement('span');
-              span.textContent = text[i];
-              span.style.opacity = '0';
-              span.style.transform = 'translateY(20px)';
-              title.appendChild(span);
+            function startScrambleLoop(element, text, duration, loopDelay) {
+                function doOneCycle() {
+                    scrambleTextElement(element, text, duration, () => {
+                        if (element._loopTimeout) {
+                            clearTimeout(element._loopTimeout);
+                        }
+                        element._loopTimeout = setTimeout(() => {
+                            doOneCycle();
+                        }, loopDelay);
+                    });
+                }
+                setTimeout(() => {
+                    doOneCycle();
+                }, 1500);
             }
-          }
-        });
-        
-        // Name animation
-        const nameAnimation = document.getElementById('nameAnimation');
-        const names = ['Nasr-Eddine', 'SARMOUME'];
-        let currentIndex = 0;
-        
-        function animateName() {
-          nameAnimation.innerHTML = '';
-          const currentName = names[currentIndex];
-          
-          for (let i = 0; i < currentName.length; i++) {
-            const span = document.createElement('span');
-            span.textContent = currentName[i];
-            span.style.opacity = '0';
-            span.style.transform = 'translateY(20px)';
-            span.style.transition = `all 0.3s ${i * 0.05}s ease`;
-            nameAnimation.appendChild(span);
-            
-            setTimeout(() => {
-              span.style.opacity = '1';
-              span.style.transform = 'translateY(0)';
-            }, 50);
-          }
-          
-          // Fade out after 3 seconds
-          setTimeout(() => {
-            const spans = nameAnimation.querySelectorAll('span');
-            spans.forEach((span, i) => {
-              setTimeout(() => {
-                span.style.opacity = '0';
-                span.style.transform = 'translateY(-20px)';
-              }, i * 30);
+
+            // ========== HERO NAME SCRAMBLE ==========
+            const heroNameEl = document.getElementById('heroName');
+            const heroFullName = 'Nasr-Eddine SARMOUME';
+            heroNameEl.style.minWidth = heroFullName.length + 'ch';
+            heroNameEl.style.display = 'inline-block';
+            startScrambleLoop(heroNameEl, heroFullName, 1600, 4000);
+
+            // ========== FOOTER SCRAMBLE ==========
+            const footerScrambleEl = document.getElementById('footerScramble');
+            const footerText = ' Merci de votre visite ';
+            footerScrambleEl.style.minWidth = footerText.length + 'ch';
+            footerScrambleEl.style.display = 'inline-block';
+            startScrambleLoop(footerScrambleEl, footerText, 1600, 4500);
+
+            // ========== CANVAS PARTICLES ==========
+            const canvas = document.getElementById('particles-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId = null;
+            let mouseX = -9999;
+            let mouseY = -9999;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2.5 + 0.8;
+                    this.speedX = (Math.random() - 0.5) * 0.4;
+                    this.speedY = (Math.random() - 0.5) * 0.4;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                    const colors = ['rgba(0, 212, 255, ', 'rgba(37, 99, 235, ', 'rgba(79, 70, 229, ', 'rgba(124, 58, 237, '];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    this.pulseSpeed = Math.random() * 0.02 + 0.005;
+                    this.pulseOffset = Math.random() * Math.PI * 2;
+                }
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    const dx = this.x - mouseX;
+                    const dy = this.y - mouseY;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 150 && dist > 0) {
+                        const force = (150 - dist) / 150 * 0.25;
+                        this.x += (dx / dist) * force;
+                        this.y += (dy / dist) * force;
+                    }
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                    if (this.y > canvas.height) this.y = 0;
+                }
+                draw(time) {
+                    const pulse = Math.sin(time * this.pulseSpeed + this.pulseOffset) * 0.3 + 0.7;
+                    const currentOpacity = this.opacity * pulse;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color + currentOpacity + ')';
+                    ctx.fill();
+                    ctx.shadowColor = this.color + currentOpacity * 0.4 + ')';
+                    ctx.shadowBlur = 6;
+                    ctx.fill();
+                    ctx.shadowBlur = 0;
+                }
+            }
+
+            function initParticles() {
+                const count = Math.min(Math.floor(window.innerWidth * window.innerHeight / 14000), 100);
+                particles = [];
+                for (let i = 0; i < count; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            initParticles();
+            window.addEventListener('resize', () => {
+                resizeCanvas();
+                initParticles();
             });
-          }, 3000);
-          
-          currentIndex = (currentIndex + 1) % names.length;
-          
-          // Start next animation after fade out completes
-          setTimeout(animateName, 3500);
-        }
-        
-        // Start the animation
-        animateName();
-        
-        // Trigger initial animations
-        handleScroll();
-      });
-      </script>
 
+            function animateParticles(time) {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const dist = Math.sqrt(dx * dx + dy * dy);
+                        if (dist < 120) {
+                            const opacity = (1 - dist / 120) * 0.12;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.strokeStyle = 'rgba(0, 212, 255, ' + opacity + ')';
+                            ctx.lineWidth = 0.5;
+                            ctx.stroke();
+                        }
+                    }
+                }
+                particles.forEach(p => {
+                    p.update();
+                    p.draw(time || 0);
+                });
+                animationId = requestAnimationFrame(animateParticles);
+            }
+            animateParticles(0);
 
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            document.addEventListener('mouseleave', () => {
+                mouseX = -9999;
+                mouseY = -9999;
+            });
+
+            // ========== NAVBAR & SCROLL ==========
+            const navbar = document.getElementById('navbar');
+            const scrollProgress = document.getElementById('scrollProgress');
+            const navLinks = document.querySelectorAll('.nav-link');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navToggle = document.getElementById('navToggle');
+            const sections = document.querySelectorAll('.section');
+            const revealElements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+            const skillBars = document.querySelectorAll('.skill-bar-fill');
+
+            function updateScrollProgress() {
+                const scrollTop = window.scrollY;
+                const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const progress = (scrollTop / scrollHeight) * 100;
+                scrollProgress.style.width = progress + '%';
+                if (scrollTop > 20) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }
+
+            function updateActiveSection() {
+                const scrollY = window.scrollY + window.innerHeight * 0.35;
+                let currentSection = 'accueil';
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const absoluteTop = rect.top + window.scrollY;
+                    if (scrollY >= absoluteTop) {
+                        currentSection = section.id;
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.section === currentSection);
+                });
+            }
+
+            window.addEventListener('scroll', () => {
+                updateScrollProgress();
+                updateActiveSection();
+                checkReveals();
+            });
+            window.addEventListener('load', () => {
+                updateScrollProgress();
+                updateActiveSection();
+                checkReveals();
+                animateSkillBars();
+            });
+
+            function checkReveals() {
+                const triggerBottom = window.innerHeight * 0.85;
+                revealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < triggerBottom) {
+                        el.classList.add('visible');
+                    }
+                });
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.7) {
+                        section.classList.add('visible');
+                    }
+                });
+            }
+
+            function animateSkillBars() {
+                const triggerBottom = window.innerHeight * 0.9;
+                skillBars.forEach(bar => {
+                    const rect = bar.getBoundingClientRect();
+                    if (rect.top < triggerBottom && !bar.classList.contains('animated')) {
+                        const targetWidth = parseFloat(bar.dataset.width);
+                        const delay = parseInt(bar.dataset.delay) || 0;
+                        bar.classList.add('animated');
+                        setTimeout(() => {
+                            bar.style.width = targetWidth + '%';
+                        }, delay);
+                    }
+                });
+            }
+            window.addEventListener('scroll', animateSkillBars);
+
+            // ========== NAVIGATION ==========
+            function navigateTo(sectionId) {
+                const section = document.getElementById(sectionId);
+                if (section) {
+                    const yOffset = 72;
+                    const y = section.getBoundingClientRect().top + window.scrollY - yOffset;
+                    window.scrollTo({ top: y, behavior: 'smooth' });
+                }
+                mobileMenu.classList.remove('open');
+                navToggle.classList.remove('open');
+                navLinks.forEach(link => {
+                    link.classList.toggle('active', link.dataset.section === sectionId);
+                });
+            }
+            window.navigateTo = navigateTo;
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    navigateTo(link.dataset.section);
+                });
+            });
+
+            navToggle.addEventListener('click', () => {
+                navToggle.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!navbar.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.remove('open');
+                    navToggle.classList.remove('open');
+                }
+            });
+
+            // ========== SMOOTH SCROLL FOR ANCHORS ==========
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', (e) => {
+                    const targetId = anchor.getAttribute('href').substring(1);
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        e.preventDefault();
+                        navigateTo(targetId);
+                    }
+                });
+            });
+
+            // ========== KEYBOARD ==========
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    mobileMenu.classList.remove('open');
+                    navToggle.classList.remove('open');
+                }
+            });
+
+            // ========== INIT ==========
+            setTimeout(() => {
+                document.getElementById('accueil').classList.add('visible');
+                document.querySelectorAll('.reveal').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight * 0.9) {
+                        el.classList.add('visible');
+                    }
+                });
+            }, 400);
+
+            console.log('%c Portfolio Nasr-Eddine — Cyan → Bleu → Indigo → Violet ',
+                'background: linear-gradient(135deg, #00d4ff, #2563eb, #4f46e5, #7c3aed); color: white; font-size: 14px; padding: 10px 20px; border-radius: 30px; font-weight: bold;'
+                );
+
+        })();
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
