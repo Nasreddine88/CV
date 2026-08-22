@@ -59,6 +59,7 @@
             scroll-behavior: smooth;
             scrollbar-width: thin;
             scrollbar-color: var(--accent-cyan) var(--bg-primary);
+            overflow-x: hidden;
         }
 
         body {
@@ -456,6 +457,7 @@
             transition: all var(--transition-base);
             position: relative;
             overflow: hidden;
+            max-width: 100%;
         }
         .glass-card::before {
             content: '';
@@ -700,6 +702,7 @@
             font-size: 0.9rem;
             color: var(--text-primary);
             font-weight: 500;
+            word-break: break-word;
         }
         .info-item-value a {
             color: var(--accent-cyan);
@@ -907,7 +910,7 @@
             letter-spacing: -0.3px;
         }
 
-        /* ===== INTERESTS (animées par Intersection Observer) ===== */
+        /* ===== INTERESTS ===== */
         .interests-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -923,9 +926,6 @@
             text-align: center;
             transition: all var(--transition-spring);
             cursor: default;
-            /* État initial pour l’animation */
-            opacity: 0;
-            transform: translateX(-80px) rotate(-6deg);
         }
         .interest-card:hover {
             border-color: var(--border-hover);
@@ -955,7 +955,7 @@
             line-height: 1.7;
         }
 
-        /* ===== CONTACT (animées par Intersection Observer) ===== */
+        /* ===== CONTACT ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -973,9 +973,6 @@
             text-decoration: none;
             color: var(--text-primary);
             display: block;
-            /* État initial pour l’animation */
-            opacity: 0;
-            transform: translateX(80px) rotate(6deg);
         }
         .contact-card:hover {
             border-color: var(--border-hover);
@@ -1115,7 +1112,7 @@
             border-radius: 0 2px 2px 0;
         }
 
-        /* ===== REVEAL ===== */
+        /* ===== REVEAL (pour les sections) ===== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -1150,7 +1147,39 @@
         .stagger-5 { transition-delay: 0.5s; }
         .stagger-6 { transition-delay: 0.6s; }
 
-        /* ===== RESPONSIVE ===== */
+        /* =========================================
+           ÉTATS INITIAUX POUR LES ANIMATIONS
+           ========================================= */
+        .about-grid .glass-card,
+        .timeline-item,
+        .skill-card,
+        .interest-card,
+        .contact-card {
+            opacity: 0;
+            will-change: transform, opacity;
+        }
+
+        /* Des transformations spécifiques sont appliquées en JS */
+        /* On définit ici les valeurs par défaut qui seront écrasées par le reset */
+        .about-grid .glass-card {
+            transform: translateX(-40px);
+        }
+        .timeline-item {
+            transform: translateY(40px);
+        }
+        .skill-card {
+            transform: translateY(40px);
+        }
+        .interest-card {
+            transform: translateX(-60px) rotate(-4deg);
+        }
+        .contact-card {
+            transform: translateX(60px) rotate(4deg);
+        }
+
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
         @media (max-width: 1024px) {
             .skills-grid { grid-template-columns: 1fr; }
             .interests-grid { grid-template-columns: 1fr; }
@@ -1169,6 +1198,7 @@
             .ring-small { width: 220px; height: 220px; }
             .profile-photo { width: 170px; height: 170px; }
         }
+
         @media (max-width: 768px) {
             .navbar { padding: 8px 16px; height: 56px; }
             .navbar-links { display: none; }
@@ -1191,7 +1221,11 @@
             .footer-message { font-size: 1.1rem; }
             .hero-name-scramble { font-size: clamp(1.6rem, 4vw, 2.2rem); }
             .footer-copyright-wrapper { left: 12px; bottom: 12px; font-size: 0.55rem; }
+            /* Correction mobile : éviter le débordement */
+            .about-grid .glass-card { max-width: 100%; }
+            .glass-card { padding: 20px; }
         }
+
         @media (max-width: 480px) {
             .photo-frame { width: 240px; height: 240px; }
             .ring-large { width: 185px; height: 185px; }
@@ -1199,11 +1233,14 @@
             .profile-photo { width: 130px; height: 130px; }
             .hero-title { font-size: 1.6rem; }
             .btn { padding: 10px 18px; font-size: 0.85rem; }
-            .glass-card { padding: 18px; }
+            .section { padding: 60px 12px 30px; }
+            .glass-card { padding: 16px; }
             .footer-message { font-size: 1rem; }
             .hero-name-scramble { font-size: clamp(1.3rem, 3.5vw, 1.6rem); min-width: unset; width: 100%; }
             .hero-name-wrapper { min-width: unset; width: 100%; }
             .footer-copyright-wrapper { left: 10px; bottom: 10px; font-size: 0.5rem; }
+            .about-info-grid { grid-template-columns: 1fr; }
+            .info-item { padding: 12px; }
         }
     </style>
 </head>
@@ -1229,9 +1266,7 @@
     <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="navbar-left">
-            <div class="navbar-avatar">
-                <img src="logo-NS.png" alt="Logo Nasr-Eddine">
-            </div>
+            <div class="navbar-avatar"><img src="logo-NS.png" alt="Logo Nasr-Eddine"></div>
             <span class="navbar-name">Nasr-Eddine SARMOUME</span>
         </div>
         <div class="navbar-links" id="navLinks">
@@ -1243,11 +1278,7 @@
             <button class="nav-link" data-section="interets"><i class="fa-solid fa-heart"></i> Intérêts</button>
             <button class="nav-link" data-section="contact"><i class="fa-solid fa-envelope"></i> Contact</button>
         </div>
-        <button class="nav-toggle" id="navToggle" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
 
     <!-- MOBILE MENU -->
@@ -1267,14 +1298,12 @@
             <div class="photo-frame">
                 <div class="ring ring-large"></div>
                 <div class="ring ring-small"></div>
-                <img src="photo-de-profile.jpg" class="profile-photo" alt="Photo de profil Nasr Eddine">
+                <img src="photo-de-profile.jpg" class="profile-photo" alt="Photo de profil">
             </div>
             <div class="hero-text">
                 <div class="hero-greeting">Bonjour, je suis</div>
                 <h1 class="hero-title">
-                    <span class="hero-name-wrapper">
-                        <span class="hero-name-scramble" id="heroName">Nasr-Eddine SARMOUME</span>
-                    </span>
+                    <span class="hero-name-wrapper"><span class="hero-name-scramble" id="heroName">Nasr-Eddine SARMOUME</span></span>
                 </h1>
                 <p class="hero-description">
                     Bienvenue ! 👋<br><br>
@@ -1283,9 +1312,7 @@
                     Curieux 🤔 ? Faites un tour 😉.
                 </p>
                 <div class="hero-buttons">
-                    <a href="#apropos" class="btn btn-primary" onclick="navigateTo('apropos')">
-                        <i class="fa-solid fa-arrow-down"></i> À propos de moi
-                    </a>
+                    <a href="#apropos" class="btn btn-primary" onclick="navigateTo('apropos')"><i class="fa-solid fa-arrow-down"></i> À propos de moi</a>
                 </div>
             </div>
         </div>
@@ -1299,63 +1326,33 @@
                 <h2 class="section-title">À propos de moi</h2>
             </div>
             <div class="about-grid">
-                <div class="reveal-left">
-                    <div class="glass-card" style="height:100%; display:flex; flex-direction:column; justify-content:center;">
-                        <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.8;">
-                            Mon domaine de compétences est vaste, j'ai travaillé dans différents secteurs, qu'il s'agisse de l'informatique,
-                            Gestionnaire Back Office litige carte chez AVEM, manager chez Carrefour Market, manager d'inventaires,
-                            en laboratoire d'analyses médicales ou agroalimentaires.<br><br>
-                            Ces diverses expériences m'ont permis d'acquérir certaines connaissances et autonomie dans beaucoup de secteurs
-                            d'activité et aussi l'occasion de développer mes capacités d'adaptation et ma polyvalence.<br><br>
-                            <strong style="color:var(--text-primary);">Avisé, Rigoureux, Volontaire</strong> et possédant un très bon esprit d'équipe,
-                            je peux apporter à votre entreprise mes compétences obtenues au cours de ces années.
-                        </p>
-                    </div>
+                <div class="glass-card">
+                    <p style="color:var(--text-secondary); font-size:0.95rem; line-height:1.8;">
+                        Mon domaine de compétences est vaste, j'ai travaillé dans différents secteurs, qu'il s'agisse de l'informatique,
+                        Gestionnaire Back Office litige carte chez AVEM, manager chez Carrefour Market, manager d'inventaires,
+                        en laboratoire d'analyses médicales ou agroalimentaires.<br><br>
+                        Ces diverses expériences m'ont permis d'acquérir certaines connaissances et autonomie dans beaucoup de secteurs
+                        d'activité et aussi l'occasion de développer mes capacités d'adaptation et ma polyvalence.<br><br>
+                        <strong style="color:var(--text-primary);">Avisé, Rigoureux, Volontaire</strong> et possédant un très bon esprit d'équipe,
+                        je peux apporter à votre entreprise mes compétences obtenues au cours de ces années.
+                    </p>
                 </div>
-                <div class="reveal-right">
-                    <div class="glass-card">
-                        <h3 style="font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--accent-cyan);">
-                            <i class="fa-solid fa-id-card" style="margin-right:8px;"></i>Informations
-                        </h3>
-                        <div class="about-info-grid">
-                            <div class="info-item">
-                                <div class="info-item-label">Date de naissance</div>
-                                <div class="info-item-value">20 Août 1988</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-item-label">Âge</div>
-                                <div class="info-item-value">38 Ans</div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-item-label">Email</div>
-                                <div class="info-item-value"><a href="mailto:nasreddine_88@hotmail.com">nasr*********@hotmail.com</a></div>
-                            </div>
-                            <div class="info-item">
-                                <div class="info-item-label">Téléphone</div>
-                                <div class="info-item-value"><a href="tel:+33758214738">+33758******</a></div>
-                            </div>
-                            <div class="info-item" style="grid-column: span 2;">
-                                <div class="info-item-label">Ville</div>
-                                <div class="info-item-value">Le Cendre, Auvergne-Rhône-Alpes, 63760 France</div>
-                            </div>
-                        </div>
-                        <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border-glass);">
-                            <h3 style="font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--accent-cyan);">
-                                <i class="fa-solid fa-language" style="margin-right:8px;"></i>Langues
-                            </h3>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Français</span><span class="skill-bar-percent"></span></div>
-                                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="95" data-delay="0"></div></div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Arabe</span><span class="skill-bar-percent"></span></div>
-                                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="99" data-delay="100"></div></div>
-                            </div>
-                            <div class="skill-bar-container">
-                                <div class="skill-bar-header"><span class="skill-bar-name">Anglais</span><span class="skill-bar-percent"></span></div>
-                                <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92" data-delay="200"></div></div>
-                            </div>
-                        </div>
+                <div class="glass-card">
+                    <h3 style="font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--accent-cyan);">
+                        <i class="fa-solid fa-id-card" style="margin-right:8px;"></i>Informations
+                    </h3>
+                    <div class="about-info-grid">
+                        <div class="info-item"><div class="info-item-label">Date de naissance</div><div class="info-item-value">20 Août 1988</div></div>
+                        <div class="info-item"><div class="info-item-label">Âge</div><div class="info-item-value">38 Ans</div></div>
+                        <div class="info-item"><div class="info-item-label">Email</div><div class="info-item-value"><a href="mailto:nasreddine_88@hotmail.com">nasr*********@hotmail.com</a></div></div>
+                        <div class="info-item"><div class="info-item-label">Téléphone</div><div class="info-item-value"><a href="tel:+33758214738">+33758******</a></div></div>
+                        <div class="info-item" style="grid-column: span 2;"><div class="info-item-label">Ville</div><div class="info-item-value">Le Cendre, Auvergne-Rhône-Alpes, 63760 France</div></div>
+                    </div>
+                    <div style="margin-top:20px; padding-top:20px; border-top:1px solid var(--border-glass);">
+                        <h3 style="font-family:var(--font-heading); font-size:1.1rem; font-weight:600; margin-bottom:16px; color:var(--accent-cyan);"><i class="fa-solid fa-language" style="margin-right:8px;"></i>Langues</h3>
+                        <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">Français</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="95" data-delay="0"></div></div></div>
+                        <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">Arabe</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="99" data-delay="100"></div></div></div>
+                        <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">Anglais</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="92" data-delay="200"></div></div></div>
                     </div>
                 </div>
             </div>
@@ -1371,11 +1368,11 @@
             </div>
             <div class="glass-card">
                 <div class="timeline">
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2023</div><div class="timeline-title">Certificat de réussite</div><div class="timeline-company">OpenClassrooms &amp; Mind Luster</div><div class="timeline-description">De Juillet 2023 à Août 2023 — Développement web, Comprendre le web. Créez votre site web avec HTML5 et CSS3, JavaScript.</div></div>
-                    <div class="timeline-item reveal-right"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2016</div><div class="timeline-title">L2 Licence Anglais (BAC+2)</div><div class="timeline-company">Université Blaise Pascal, Clermont-Ferrand</div><div class="timeline-description">De septembre 2015 à mai 2016</div></div>
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2015</div><div class="timeline-title">Licence en Langue Française (BAC+3)</div><div class="timeline-company">Université Djilali Bounaama, Khemis Meliana, Algérie</div><div class="timeline-description">De septembre 2012 à juin 2015 — Lettres et langues étrangères.<br>Validé en France le 19/06/2023 par Enic Naric (équivalent licence en didactique du français langue étrangère).<br>Filière : langue Française. Spécialité : didactique du français langue étrangère.</div></div>
-                    <div class="timeline-item reveal-right"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2012</div><div class="timeline-title">Droit et Sciences Juridiques (BAC+1)</div><div class="timeline-company">Centre Universitaire de Tissemsilet, Algérie</div><div class="timeline-description">De septembre 2011 à juin 2012 — Branche : Droit. Spécialité : État et institutions.</div></div>
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2011</div><div class="timeline-title">Laborantin en Microbiologie (BTS : BAC+2)</div><div class="timeline-company">Institut National Spécialisé en Microbiologie, Blida, Algérie</div><div class="timeline-description">De septembre 2008 à juin 2011 — Validé en France le 13/02/2018 par Enic Naric (équivalent BTS contrôle de qualité, biologie, chimie).<br>Filière : biologie, microbiologie (Contrôle de qualité). Spécialité : biologie, microbiologie.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2023</div><div class="timeline-title">Certificat de réussite</div><div class="timeline-company">OpenClassrooms &amp; Mind Luster</div><div class="timeline-description">De Juillet 2023 à Août 2023 — Développement web, Comprendre le web. Créez votre site web avec HTML5 et CSS3, JavaScript.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2016</div><div class="timeline-title">L2 Licence Anglais (BAC+2)</div><div class="timeline-company">Université Blaise Pascal, Clermont-Ferrand</div><div class="timeline-description">De septembre 2015 à mai 2016</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2015</div><div class="timeline-title">Licence en Langue Française (BAC+3)</div><div class="timeline-company">Université Djilali Bounaama, Khemis Meliana, Algérie</div><div class="timeline-description">De septembre 2012 à juin 2015 — Lettres et langues étrangères.<br>Validé en France le 19/06/2023 par Enic Naric (équivalent licence en didactique du français langue étrangère).<br>Filière : langue Française. Spécialité : didactique du français langue étrangère.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2012</div><div class="timeline-title">Droit et Sciences Juridiques (BAC+1)</div><div class="timeline-company">Centre Universitaire de Tissemsilet, Algérie</div><div class="timeline-description">De septembre 2011 à juin 2012 — Branche : Droit. Spécialité : État et institutions.</div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> 2011</div><div class="timeline-title">Laborantin en Microbiologie (BTS : BAC+2)</div><div class="timeline-company">Institut National Spécialisé en Microbiologie, Blida, Algérie</div><div class="timeline-description">De septembre 2008 à juin 2011 — Validé en France le 13/02/2018 par Enic Naric (équivalent BTS contrôle de qualité, biologie, chimie).<br>Filière : biologie, microbiologie (Contrôle de qualité). Spécialité : biologie, microbiologie.</div></div>
                 </div>
             </div>
         </div>
@@ -1390,13 +1387,13 @@
             </div>
             <div class="glass-card">
                 <div class="timeline">
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Depuis Janvier 2024</div><div class="timeline-title">Gestionnaire Back Office Litige Carte</div><div class="timeline-company">AVEM, Clermont-Ferrand</div><div class="timeline-description"><ul><li>Contrôler les dossiers transmis par les banques clientes</li><li>Vérifier la conformité et la complétude du dossier</li><li>Collecter les éléments complémentaires nécessaires</li><li>Instruire le dossier et traiter les demandes</li><li>Vérifier la recevabilité des demandes</li><li>Émettre les opérations bancaires de dénouement</li><li>Renseigner les demandeurs, les banques et caisses régionales</li></ul></div></div>
-                    <div class="timeline-item reveal-right"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Septembre - Octobre 2023</div><div class="timeline-title">Chargé de Qualité Opérationnelle</div><div class="timeline-company">Movianto, Cournon d'Auvergne</div><div class="timeline-description"><ul><li>Entrer les données en base interne de l'entreprise</li><li>Préparation logistique des colis VIATRIS de prélèvements pharmaceutiques</li><li>Réalisation des prélèvements qualitatifs pharmaceutiques (DMF)</li><li>Gérer les stocks de service qualité sur FlexFlow</li><li>Analyser la conformité des documentations de lots</li><li>Collecte et analyse des résultats de conditions de transport</li></ul></div></div>
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Juin - Août 2023</div><div class="timeline-title">Manager Niveau V (Area Manager)</div><div class="timeline-company">Carrefour Market, Riom</div><div class="timeline-description"><ul><li>Formation Caroline, Portail Market et logiciels Carrefour Market (Carla, Game, Pricer, Caromobile, Adiplan, Syster...)</li><li>Gérer le stock et manager les équipes sur les différentes tâches</li><li>Mise en rayons, déstockage et rotation</li><li>Implantation des rayons</li><li>Manutention avec gerbeur et transpalette</li></ul></div></div>
-                    <div class="timeline-item reveal-right"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Novembre 2018 - Juin 2023</div><div class="timeline-title">Manager d'Inventaire Grandes Surfaces</div><div class="timeline-company">RGIS Spécialistes en Inventaire, Clermont-Ferrand</div><div class="timeline-description"><ul><li>Déplacement sur les lieux de missions (la nuit)</li><li>Manager les équipes</li><li>Responsable d'inventaire (superviseur)</li><li>Intégration et formation des nouveaux compteurs</li><li>Encadrement, évaluation et suivi des compteurs</li></ul></div></div>
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Septembre 2017 - Novembre 2018</div><div class="timeline-title">Employé de Laboratoire Qualité</div><div class="timeline-company">Limagrain, Ennezat</div><div class="timeline-description"><ul><li>Contrat saisonnier 09/2017-11/2017 et 09/18-11/18</li><li>Préparation des plaques de PCR (tournesol, maïs)</li><li>Tests Tétrazolium, Tests PMG</li><li>Préparation des semis aux champs</li><li>Vigueurs Dormance, Cinétiques</li><li>Utilisation du LIMS (logiciels internes)</li></ul></div></div>
-                    <div class="timeline-item reveal-right"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Mai 2012 - Août 2015</div><div class="timeline-title">Technicien de Laboratoire d'Analyses Médicales</div><div class="timeline-company">Établissement Hospitalier Public, Theniet el Had, Algérie</div><div class="timeline-description"><ul><li>Prélèvements : bactériologiques, hématologiques</li><li>Analyses bactériologiques (ECBU, ECB des sels, ECB des pertes...)</li><li>Analyses hématologiques (FNS, CRP, VS, GS...)</li><li>Analyses biochimiques (Urée, Créatinine, TP, LCR...)</li><li>Sérologie (HIV, Hépatite B et C, BW...)</li><li>Séparations des poches de sang et transfusion</li><li>Injections : intraveineuses, intramusculaires, sous-cutanées, perfusions</li></ul></div></div>
-                    <div class="timeline-item reveal-left"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Avril 2012 - Août 2015</div><div class="timeline-title">Gestion Réseau et Maintenance Informatique (Gérant)</div><div class="timeline-company">Cyber Regina, Theniet el Had, Algérie</div><div class="timeline-description"><ul><li>Formatage (software) : Windows, Mac, logiciels de base (Pack Office, Word, Excel...)</li><li>Réparation (hardware) : CPU, RAM, carte graphique, ventilateurs...</li><li>Récupération de données perdues</li><li>Installation du réseau interne (Easycafe Tinasoft)</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Depuis Janvier 2024</div><div class="timeline-title">Gestionnaire Back Office Litige Carte</div><div class="timeline-company">AVEM, Clermont-Ferrand</div><div class="timeline-description"><ul><li>Contrôler les dossiers transmis par les banques clientes</li><li>Vérifier la conformité et la complétude du dossier</li><li>Collecter les éléments complémentaires nécessaires</li><li>Instruire le dossier et traiter les demandes</li><li>Vérifier la recevabilité des demandes</li><li>Émettre les opérations bancaires de dénouement</li><li>Renseigner les demandeurs, les banques et caisses régionales</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Septembre - Octobre 2023</div><div class="timeline-title">Chargé de Qualité Opérationnelle</div><div class="timeline-company">Movianto, Cournon d'Auvergne</div><div class="timeline-description"><ul><li>Entrer les données en base interne de l'entreprise</li><li>Préparation logistique des colis VIATRIS de prélèvements pharmaceutiques</li><li>Réalisation des prélèvements qualitatifs pharmaceutiques (DMF)</li><li>Gérer les stocks de service qualité sur FlexFlow</li><li>Analyser la conformité des documentations de lots</li><li>Collecte et analyse des résultats de conditions de transport</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Juin - Août 2023</div><div class="timeline-title">Manager Niveau V (Area Manager)</div><div class="timeline-company">Carrefour Market, Riom</div><div class="timeline-description"><ul><li>Formation Caroline, Portail Market et logiciels Carrefour Market (Carla, Game, Pricer, Caromobile, Adiplan, Syster...)</li><li>Gérer le stock et manager les équipes sur les différentes tâches</li><li>Mise en rayons, déstockage et rotation</li><li>Implantation des rayons</li><li>Manutention avec gerbeur et transpalette</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Novembre 2018 - Juin 2023</div><div class="timeline-title">Manager d'Inventaire Grandes Surfaces</div><div class="timeline-company">RGIS Spécialistes en Inventaire, Clermont-Ferrand</div><div class="timeline-description"><ul><li>Déplacement sur les lieux de missions (la nuit)</li><li>Manager les équipes</li><li>Responsable d'inventaire (superviseur)</li><li>Intégration et formation des nouveaux compteurs</li><li>Encadrement, évaluation et suivi des compteurs</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Septembre 2017 - Novembre 2018</div><div class="timeline-title">Employé de Laboratoire Qualité</div><div class="timeline-company">Limagrain, Ennezat</div><div class="timeline-description"><ul><li>Contrat saisonnier 09/2017-11/2017 et 09/18-11/18</li><li>Préparation des plaques de PCR (tournesol, maïs)</li><li>Tests Tétrazolium, Tests PMG</li><li>Préparation des semis aux champs</li><li>Vigueurs Dormance, Cinétiques</li><li>Utilisation du LIMS (logiciels internes)</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Mai 2012 - Août 2015</div><div class="timeline-title">Technicien de Laboratoire d'Analyses Médicales</div><div class="timeline-company">Établissement Hospitalier Public, Theniet el Had, Algérie</div><div class="timeline-description"><ul><li>Prélèvements : bactériologiques, hématologiques</li><li>Analyses bactériologiques (ECBU, ECB des sels, ECB des pertes...)</li><li>Analyses hématologiques (FNS, CRP, VS, GS...)</li><li>Analyses biochimiques (Urée, Créatinine, TP, LCR...)</li><li>Sérologie (HIV, Hépatite B et C, BW...)</li><li>Séparations des poches de sang et transfusion</li><li>Injections : intraveineuses, intramusculaires, sous-cutanées, perfusions</li></ul></div></div>
+                    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-date"><i class="fa-solid fa-calendar-days"></i> Avril 2012 - Août 2015</div><div class="timeline-title">Gestion Réseau et Maintenance Informatique (Gérant)</div><div class="timeline-company">Cyber Regina, Theniet el Had, Algérie</div><div class="timeline-description"><ul><li>Formatage (software) : Windows, Mac, logiciels de base (Pack Office, Word, Excel...)</li><li>Réparation (hardware) : CPU, RAM, carte graphique, ventilateurs...</li><li>Récupération de données perdues</li><li>Installation du réseau interne (Easycafe Tinasoft)</li></ul></div></div>
                 </div>
             </div>
         </div>
@@ -1410,7 +1407,7 @@
                 <h2 class="section-title">Compétences</h2>
             </div>
             <div class="skills-grid">
-                <div class="skill-card reveal stagger-1">
+                <div class="skill-card">
                     <div class="skill-card-icon"><i class="fa-solid fa-code"></i></div>
                     <div class="skill-card-title">Front-End Development</div>
                     <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">HTML</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="30" data-delay="0"></div></div></div>
@@ -1419,21 +1416,21 @@
                     <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">GitHub</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="40" data-delay="300"></div></div></div>
                     <p style="font-size:0.8rem; color:var(--text-muted); margin-top:12px; font-style:italic;">Des bases solides, en cours d'apprentissage...</p>
                 </div>
-                <div class="skill-card reveal stagger-2">
+                <div class="skill-card">
                     <div class="skill-card-icon"><i class="fa-solid fa-palette"></i></div>
                     <div class="skill-card-title">Applications &amp; Services</div>
                     <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">Photoshop</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="50" data-delay="0"></div></div></div>
                     <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">Microsoft Office</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="60" data-delay="100"></div></div></div>
                     <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:12px;">Bonne maîtrise de Word, Excel, PowerPoint... et niveau intermédiaire en Photoshop.</p>
                 </div>
-                <div class="skill-card reveal stagger-3">
+                <div class="skill-card">
                     <div class="skill-card-icon"><i class="fa-solid fa-cubes"></i></div>
                     <div class="skill-card-title">Autres Compétences</div>
                     <div class="skill-bar-container" style="margin-bottom:4px;"><div class="skill-bar-header"><span class="skill-bar-name">Compétences transversales</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70" data-delay="0"></div></div></div>
                     <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:14px; line-height:1.6;">
-                        <strong style="color:var(--text-primary);">Management &amp; Vente</strong> · 
-                        <strong style="color:var(--text-primary);">Outils métiers</strong> (IA, TIM, ACS, GDR, Netsize, RGIS Ngen, Winbase, LIMS) · 
-                        <strong style="color:var(--text-primary);">Carrefour</strong> (Caroline, Portail Market) · 
+                        <strong style="color:var(--text-primary);">Management &amp; Vente</strong> ·
+                        <strong style="color:var(--text-primary);">Outils métiers</strong> (IA, TIM, ACS, GDR, Netsize, RGIS Ngen, Winbase, LIMS) ·
+                        <strong style="color:var(--text-primary);">Carrefour</strong> (Caroline, Portail Market) ·
                         Laboratoire (microbiologie, chimie), gestion de stock, encadrement d'équipe.
                     </p>
                 </div>
@@ -1449,21 +1446,9 @@
                 <h2 class="section-title">Centres d'intérêt</h2>
             </div>
             <div class="interests-grid">
-                <div class="interest-card">
-                    <i class="fa-solid fa-earth-americas interest-card-icon"></i>
-                    <div class="interest-card-title">Hobbies</div>
-                    <p>Lecture, Voyage.<br>Sport : Boxe, Gymnastique (Tumbling),<br>Basket-ball, Football.</p>
-                </div>
-                <div class="interest-card">
-                    <i class="fa-solid fa-music interest-card-icon"></i>
-                    <div class="interest-card-title">Musique</div>
-                    <p>Guitare<br>Piano</p>
-                </div>
-                <div class="interest-card">
-                    <i class="fa-solid fa-laptop-code interest-card-icon"></i>
-                    <div class="interest-card-title">Technologie</div>
-                    <p>Développement web<br>Design IA<br>Nouvelles technologies</p>
-                </div>
+                <div class="interest-card"><i class="fa-solid fa-earth-americas interest-card-icon"></i><div class="interest-card-title">Hobbies</div><p>Lecture, Voyage.<br>Sport : Boxe, Gymnastique (Tumbling),<br>Basket-ball, Football.</p></div>
+                <div class="interest-card"><i class="fa-solid fa-music interest-card-icon"></i><div class="interest-card-title">Musique</div><p>Guitare<br>Piano</p></div>
+                <div class="interest-card"><i class="fa-solid fa-laptop-code interest-card-icon"></i><div class="interest-card-title">Technologie</div><p>Développement web<br>Design IA<br>Nouvelles technologies</p></div>
             </div>
         </div>
     </section>
@@ -1479,7 +1464,7 @@
                 <a href="tel:+33758214738" class="contact-card"><i class="fa-solid fa-phone contact-card-icon"></i><div class="contact-card-title">Téléphone</div><div class="contact-card-value">+33758******</div></a>
                 <a href="mailto:nasreddine_88@hotmail.com" class="contact-card"><i class="fa-solid fa-envelope contact-card-icon"></i><div class="contact-card-title">Email</div><div class="contact-card-value">nasr*********@hotmail.com</div></a>
                 <div class="contact-card"><i class="fa-solid fa-location-dot contact-card-icon"></i><div class="contact-card-title">Adresse</div><div class="contact-card-value">Le Cendre, Auvergne-Rhône-Alpes, 63760 France</div></div>
-                <div class="contact-card"><i class="fa-solid fa-globe contact-card-icon"></i><div class="contact-card-title">Website</div><div class="contact-card-value"><a href="#" style="color:var(--accent-cyan); text-decoration:none;">Cliquez ici</a></div></div>
+                <div class="contact-card"><i class="fa-solid fa-globe contact-card-icon"></i><div class="contact-card-title">Website</div><div class="contact-card-value"><a href="#">Cliquez ici</a></div></div>
             </div>
         </div>
     </section>
@@ -1491,16 +1476,11 @@
             <a href="https://github.com/Nasreddine88" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
             <a href="mailto:nasreddine_88@hotmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
         </div>
-        <div class="footer-message">
-            <span class="scramble-text" id="footerScramble"> Merci de votre visite </span>
-        </div>
+        <div class="footer-message"><span class="scramble-text" id="footerScramble"> Merci de votre visite </span></div>
     </footer>
 
     <!-- COPYRIGHT -->
-    <div class="footer-copyright-wrapper">
-        <span>© 2026 Nasr-Eddine SARMOUME — Tous droits réservés</span>
-        <span class="cursor-blink"></span>
-    </div>
+    <div class="footer-copyright-wrapper"><span>© 2026 Nasr-Eddine SARMOUME — Tous droits réservés</span><span class="cursor-blink"></span></div>
 
     <script>
         (function() {
@@ -1518,70 +1498,76 @@
                     setTimeout(() => {
                         preloader.classList.add('hidden');
                         glitchOverlay.classList.add('active');
-                        setTimeout(() => {
-                            glitchOverlay.classList.remove('active');
-                        }, 1800);
+                        setTimeout(() => { glitchOverlay.classList.remove('active'); }, 1800);
                     }, 500);
                 }
             }, 200);
 
             // =============================================
-            // INTERSECTION OBSERVER POUR LES ANIMATIONS
+            // ANIMATION DES BLOCS PAR SECTION (INTERSECTION OBSERVER)
             // =============================================
-            function setupCardAnimations() {
-                // Récupère toutes les cartes
-                const interestCards = document.querySelectorAll('.interest-card');
-                const contactCards = document.querySelectorAll('.contact-card');
+            function setupSectionObserver() {
+                const sections = document.querySelectorAll('#apropos, #diplomes, #experience, #competences, #interets, #contact');
 
-                // Fonction pour animer une carte individuelle
-                function animateCard(card, type) {
-                    const fromX = type === 'interest' ? '-80px' : '80px';
-                    const fromRotate = type === 'interest' ? '-6deg' : '6deg';
-                    anime({
-                        targets: card,
-                        opacity: [0, 1],
-                        translateX: [fromX, 0],
-                        rotate: [fromRotate, '0deg'],
-                        duration: 900,
-                        easing: 'easeOutBack',
-                    });
-                }
+                const resetElement = (el, type) => {
+                    el.style.opacity = 0;
+                    if (type === 'glass') el.style.transform = 'translateX(-40px)';
+                    else if (type === 'timeline' || type === 'skill') el.style.transform = 'translateY(40px)';
+                    else if (type === 'interest') el.style.transform = 'translateX(-60px) rotate(-4deg)';
+                    else if (type === 'contact') el.style.transform = 'translateX(60px) rotate(4deg)';
+                };
 
-                // Réinitialiser l'état de la carte (quand elle sort du viewport)
-                function resetCard(card) {
-                    const type = card.classList.contains('interest-card') ? 'interest' : 'contact';
-                    const fromX = type === 'interest' ? '-80px' : '80px';
-                    const fromRotate = type === 'interest' ? '-6deg' : '6deg';
-                    card.style.opacity = '0';
-                    card.style.transform = `translateX(${fromX}) rotate(${fromRotate})`;
-                }
-
-                // Options de l'observateur (seuil + marge pour déclencher un peu avant)
-                const options = {
-                    threshold: 0.2,
-                    rootMargin: '0px 0px -30px 0px' // un peu de marge pour éviter les déclenchements trop tardifs
+                const getType = (el) => {
+                    if (el.classList.contains('glass-card')) return 'glass';
+                    if (el.classList.contains('timeline-item')) return 'timeline';
+                    if (el.classList.contains('skill-card')) return 'skill';
+                    if (el.classList.contains('interest-card')) return 'interest';
+                    if (el.classList.contains('contact-card')) return 'contact';
+                    return null;
                 };
 
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
-                        const card = entry.target;
+                        const section = entry.target;
+                        let targets = [];
+                        if (section.id === 'apropos') targets = section.querySelectorAll('.glass-card');
+                        else if (section.id === 'diplomes' || section.id === 'experience') targets = section
+                            .querySelectorAll('.timeline-item');
+                        else if (section.id === 'competences') targets = section.querySelectorAll('.skill-card');
+                        else if (section.id === 'interets') targets = section.querySelectorAll('.interest-card');
+                        else if (section.id === 'contact') targets = section.querySelectorAll('.contact-card');
+
                         if (entry.isIntersecting) {
-                            // Délai de 400ms avant de lancer l'animation
-                            setTimeout(() => {
-                                const type = card.classList.contains('interest-card') ? 'interest' :
-                                    'contact';
-                                animateCard(card, type);
-                            }, 400);
+                            if (targets.length) {
+                                // Réinitialiser complètement avant de jouer
+                                targets.forEach(el => {
+                                    const type = getType(el);
+                                    if (type) resetElement(el, type);
+                                });
+
+                                anime({
+                                    targets: targets,
+                                    opacity: [0, 1],
+                                    translateX: [null, 0],
+                                    translateY: [null, 0],
+                                    rotate: [null, '0deg'],
+                                    duration: 900,
+                                    easing: 'easeOutBack',
+                                    delay: anime.stagger(130, { start: 0 })
+                                });
+                            }
                         } else {
-                            // Réinitialiser quand la carte sort du viewport
-                            resetCard(card);
+                            if (targets.length) {
+                                targets.forEach(el => {
+                                    const type = getType(el);
+                                    if (type) resetElement(el, type);
+                                });
+                            }
                         }
                     });
-                }, options);
+                }, { threshold: 0.15 });
 
-                // Observer chaque carte
-                interestCards.forEach(card => observer.observe(card));
-                contactCards.forEach(card => observer.observe(card));
+                sections.forEach(section => observer.observe(section));
             }
 
             // =============================================
@@ -1640,7 +1626,7 @@
             startScrambleLoop(footerScrambleEl, footerText, 1600, 4500);
 
             // =============================================
-            // PARTICLES (fond animé)
+            // PARTICLES
             // =============================================
             const canvas = document.getElementById('particles-canvas');
             const ctx = canvas.getContext('2d');
@@ -1649,10 +1635,8 @@
             let mouseX = -9999,
                 mouseY = -9999;
 
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
+            function resizeCanvas() { canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight; }
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
 
@@ -1783,7 +1767,7 @@
                 checkReveals();
                 animateSkillBars();
                 // Lancer l'observateur après le chargement
-                setupCardAnimations();
+                setupSectionObserver();
             });
 
             function checkReveals() {
@@ -1868,12 +1852,11 @@
                 });
             }, 400);
 
-            console.log('%c Portfolio Nasr-Eddine — Intersection Observer Stagger ',
+            console.log('%c Portfolio Nasr-Eddine — Stagger universel au scroll ',
                 'background: linear-gradient(135deg, #00d4ff, #2563eb, #4f46e5, #7c3aed); color: white; font-size: 14px; padding: 10px 20px; border-radius: 30px; font-weight: bold;'
-            );
+                );
 
         })();
     </script>
-
 </body>
 </html>
