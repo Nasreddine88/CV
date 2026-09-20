@@ -1496,7 +1496,7 @@
             const glitchOverlay = document.querySelector('.glitch-overlay');
             let loadProgress = 0;
             const preloadInterval = setInterval(() => {
-                loadProgress += Math.random() * 7 + 2;
+                loadProgress += Math.random() * 12 + 12;
                 if (loadProgress >= 100) {
                     loadProgress = 100;
                     clearInterval(preloadInterval);
@@ -1504,7 +1504,7 @@
                         preloader.classList.add('hidden');
                         glitchOverlay.classList.add('active');
                         setTimeout(() => { glitchOverlay.classList.remove('active'); }, 1800);
-                    }, 500);
+                    }, 300);
                 }
             }, 200);
 
