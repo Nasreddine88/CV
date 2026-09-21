@@ -10,9 +10,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Anime.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <style>
- 
+        /* ===== ROOT - THÈME CYAN → BLEU → INDIGO → VIOLET ===== */
         :root {
             --bg-primary: #05050f;
             --bg-secondary: #0a0a1e;
@@ -45,7 +46,7 @@
             --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-     
+        /* ===== RESET ===== */
         *,
         *::before,
         *::after {
@@ -91,7 +92,7 @@
             border-radius: 3px;
         }
 
-
+        /* ===== PARTICLES ===== */
         #particles-canvas {
             position: fixed;
             top: 0;
@@ -102,7 +103,7 @@
             pointer-events: none;
         }
 
-
+        /* ===== PRELOADER ===== */
         #preloader {
             position: fixed;
             top: 0;
@@ -191,6 +192,7 @@
             58%, 100% { transform: rotate(calc(var(--s, 1) * 1turn)); }
         }
 
+        /* ===== GLITCH OVERLAY ===== */
         .glitch-overlay {
             position: fixed;
             inset: 0;
@@ -219,6 +221,7 @@
             100% { opacity: 0; }
         }
 
+        /* ===== NAVBAR ===== */
         .navbar {
             position: fixed;
             top: 0;
@@ -377,6 +380,7 @@
             border-radius: 10px;
         }
 
+        /* ===== SECTIONS ===== */
         .section {
             position: relative;
             z-index: 1;
@@ -399,6 +403,7 @@
             margin: 0 auto;
         }
 
+        /* ===== SECTION TITLE ===== */
         .section-title-wrapper {
             text-align: center;
             margin-bottom: 48px;
@@ -441,6 +446,7 @@
             filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.2));
         }
 
+        /* ===== GLASS CARD ===== */
         .glass-card {
             background: var(--bg-glass);
             backdrop-filter: blur(20px) saturate(150%);
@@ -471,7 +477,7 @@
         }
         .glass-card:hover::before { opacity: 1; }
 
-
+        /* ===== HERO ===== */
         #accueil {
             padding-top: 80px;
             min-height: 100vh;
@@ -558,6 +564,7 @@
                 0 0 50px rgba(55, 48, 163, 0.20);
         }
 
+        /* ===== HERO TEXTE ===== */
         .hero-text {
             max-width: 560px;
             flex: 1;
@@ -658,6 +665,7 @@
             transform: translateY(-2px);
         }
 
+        /* ===== ABOUT ===== */
         .about-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -706,6 +714,7 @@
             text-shadow: 0 0 10px rgba(0, 212, 255, 0.4);
         }
 
+        /* ===== SKILL BARS ===== */
         .skill-bar-container {
             margin-bottom: 14px;
         }
@@ -749,6 +758,7 @@
             filter: blur(2px);
         }
 
+        /* ===== TIMELINE ===== */
         .timeline {
             position: relative;
             padding-left: 40px;
@@ -837,6 +847,7 @@
             font-size: 0.75rem;
         }
 
+        /* ===== SKILLS CARDS ===== */
         .skills-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -899,6 +910,7 @@
             letter-spacing: -0.3px;
         }
 
+        /* ===== INTERESTS ===== */
         .interests-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -943,6 +955,7 @@
             line-height: 1.7;
         }
 
+        /* ===== CONTACT ===== */
         .contact-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -996,6 +1009,7 @@
             text-decoration: none;
         }
 
+        /* ===== FOOTER ===== */
         .footer {
             position: relative;
             z-index: 1;
@@ -1051,6 +1065,7 @@
             min-width: 28ch;
         }
 
+        /* ===== COPYRIGHT ===== */
         .footer-copyright-wrapper {
             position: fixed;
             bottom: 16px;
@@ -1083,6 +1098,7 @@
             50% { opacity: 0; }
         }
 
+        /* ===== SCROLL PROGRESS ===== */
         .scroll-progress {
             position: fixed;
             top: 0;
@@ -1096,6 +1112,7 @@
             border-radius: 0 2px 2px 0;
         }
 
+        /* ===== REVEAL (pour les sections) ===== */
         .reveal {
             opacity: 0;
             transform: translateY(30px);
@@ -1130,7 +1147,9 @@
         .stagger-5 { transition-delay: 0.5s; }
         .stagger-6 { transition-delay: 0.6s; }
 
-
+        /* =========================================
+           ÉTATS INITIAUX POUR LES ANIMATIONS
+           ========================================= */
         .about-grid .glass-card,
         .timeline-item,
         .skill-card,
@@ -1140,6 +1159,8 @@
             will-change: transform, opacity;
         }
 
+        /* Des transformations spécifiques sont appliquées en JS */
+        /* On définit ici les valeurs par défaut qui seront écrasées par le reset */
         .about-grid .glass-card {
             transform: translateX(-40px);
         }
@@ -1156,6 +1177,9 @@
             transform: translateX(60px) rotate(4deg);
         }
 
+        /* =========================================
+           RESPONSIVE
+           ========================================= */
         @media (max-width: 1024px) {
             .skills-grid { grid-template-columns: 1fr; }
             .interests-grid { grid-template-columns: 1fr; }
@@ -1197,6 +1221,7 @@
             .footer-message { font-size: 1.1rem; }
             .hero-name-scramble { font-size: clamp(1.6rem, 4vw, 2.2rem); }
             .footer-copyright-wrapper { left: 12px; bottom: 12px; font-size: 0.55rem; }
+            /* Correction mobile : éviter le débordement */
             .about-grid .glass-card { max-width: 100%; }
             .glass-card { padding: 20px; }
         }
@@ -1221,6 +1246,7 @@
 </head>
 <body>
 
+    <!-- PRELOADER -->
     <div id="preloader">
         <div class="preloader-content">
             <div class="preloader-logo">NS</div>
@@ -1228,12 +1254,16 @@
         </div>
     </div>
 
+    <!-- GLITCH OVERLAY -->
     <div class="glitch-overlay"></div>
 
+    <!-- SCROLL PROGRESS -->
     <div class="scroll-progress" id="scrollProgress"></div>
 
+    <!-- PARTICLES -->
     <canvas id="particles-canvas"></canvas>
 
+    <!-- NAVBAR -->
     <nav class="navbar" id="navbar">
         <div class="navbar-left">
             <div class="navbar-avatar"><img src="logo-NS.png" alt="Logo Nasr-Eddine"></div>
@@ -1251,6 +1281,7 @@
         <button class="nav-toggle" id="navToggle" aria-label="Menu"><span></span><span></span><span></span></button>
     </nav>
 
+    <!-- MOBILE MENU -->
     <div class="mobile-menu" id="mobileMenu">
         <button class="nav-link active" data-section="accueil" onclick="navigateTo('accueil')"><i class="fa-solid fa-house"></i> Accueil</button>
         <button class="nav-link" data-section="apropos" onclick="navigateTo('apropos')"><i class="fa-solid fa-user"></i> À propos</button>
@@ -1261,6 +1292,7 @@
         <button class="nav-link" data-section="contact" onclick="navigateTo('contact')"><i class="fa-solid fa-envelope"></i> Contact</button>
     </div>
 
+    <!-- HERO -->
     <section class="section visible" id="accueil" style="opacity:1; transform:none;">
         <div class="hero-container">
             <div class="photo-frame">
@@ -1286,6 +1318,7 @@
         </div>
     </section>
 
+    <!-- À PROPOS -->
     <section class="section" id="apropos">
         <div class="section-inner">
             <div class="section-title-wrapper">
@@ -1331,6 +1364,7 @@
         </div>
     </section>
 
+    <!-- DIPLÔMES -->
     <section class="section" id="diplomes">
         <div class="section-inner">
             <div class="section-title-wrapper">
@@ -1349,6 +1383,7 @@
         </div>
     </section>
 
+    <!-- EXPÉRIENCE -->
     <section class="section" id="experience">
         <div class="section-inner">
             <div class="section-title-wrapper">
@@ -1368,7 +1403,8 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- COMPÉTENCES -->
     <section class="section" id="competences">
         <div class="section-inner">
             <div class="section-title-wrapper">
@@ -1376,15 +1412,6 @@
                 <h2 class="section-title">Compétences</h2>
             </div>
             <div class="skills-grid">
-                <div class="skill-card">
-                    <div class="skill-card-icon"><i class="fa-solid fa-code"></i></div>
-                    <div class="skill-card-title">Front-End Development</div>
-                    <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">HTML</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="30" data-delay="0"></div></div></div>
-                    <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">CSS</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="30" data-delay="100"></div></div></div>
-                    <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">JavaScript</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="15" data-delay="200"></div></div></div>
-                    <div class="skill-bar-container"><div class="skill-bar-header"><span class="skill-bar-name">GitHub</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="40" data-delay="300"></div></div></div>
-                    <p style="font-size:0.8rem; color:var(--text-muted); margin-top:12px; font-style:italic;">Des bases solides, en cours d'apprentissage...</p>
-                </div>
                 <div class="skill-card">
     <div class="skill-card-icon"><i class="fa-solid fa-code"></i></div>
     <div class="skill-card-title">Front-End Development</div>
@@ -1397,7 +1424,7 @@
 
     <p style="font-size:0.8rem; color:var(--text-muted); margin-top:12px; font-style:italic;">Des bases solides, en cours d'apprentissage...</p>
 </div>
-<div class="skill-card">
+                <div class="skill-card">
     <div class="skill-card-icon"><i class="fa-solid fa-laptop-code"></i></div>
     <div class="skill-card-title">Applications &amp; Services</div>
 
@@ -1456,10 +1483,22 @@
         Word, Excel, PowerPoint — usage quotidien.
     </p>
 </div>
+                <div class="skill-card">
+                    <div class="skill-card-icon"><i class="fa-solid fa-cubes"></i></div>
+                    <div class="skill-card-title">Autres Compétences</div>
+                    <div class="skill-bar-container" style="margin-bottom:4px;"><div class="skill-bar-header"><span class="skill-bar-name">Compétences transversales</span><span class="skill-bar-percent"></span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70" data-delay="0"></div></div></div>
+                    <p style="font-size:0.85rem; color:var(--text-secondary); margin-top:14px; line-height:1.6;">
+                        <strong style="color:var(--text-primary);">Management &amp; Vente</strong> ·<br>
+                        <strong style="color:var(--text-primary);">Outils métiers</strong> (IA, TIM, ACS, GDR, Netsize, RGIS Ngen, Winbase, LIMS) ·<br>
+                        <strong style="color:var(--text-primary);">Carrefour</strong> (Caroline, Portail Market) ·<br>
+                        <strong style="color:var(--text-primary);"> Laboratoire </strong>(microbiologie, chimie), gestion de stock, encadrement d'équipe.
+                    </p>
+                </div>
             </div>
         </div>
     </section>
 
+    <!-- INTÉRÊTS -->
     <section class="section" id="interets">
         <div class="section-inner">
             <div class="section-title-wrapper">
@@ -1474,6 +1513,7 @@
         </div>
     </section>
 
+    <!-- CONTACT -->
     <section class="section" id="contact">
         <div class="section-inner">
             <div class="section-title-wrapper">
@@ -1489,6 +1529,7 @@
         </div>
     </section>
 
+    <!-- FOOTER -->
     <footer class="footer">
         <div class="footer-social">
             <a href="https://www.linkedin.com/in/nasreddine-sarmoume/" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
@@ -1498,12 +1539,14 @@
         <div class="footer-message"><span class="scramble-text" id="footerScramble"> Merci de votre visite </span></div>
     </footer>
 
+    <!-- COPYRIGHT -->
     <div class="footer-copyright-wrapper"><span>© 2026 Nasr-Eddine SARMOUME — Tous droits réservés</span><span class="cursor-blink"></span></div>
 
     <script>
         (function() {
             'use strict';
 
+            // ===== PRELOADER & GLITCH =====
             const preloader = document.getElementById('preloader');
             const glitchOverlay = document.querySelector('.glitch-overlay');
             let loadProgress = 0;
@@ -1520,6 +1563,9 @@
                 }
             }, 200);
 
+            // =============================================
+            // ANIMATION DES BLOCS PAR SECTION (INTERSECTION OBSERVER)
+            // =============================================
             function setupSectionObserver() {
                 const sections = document.querySelectorAll('#apropos, #diplomes, #experience, #competences, #interets, #contact');
 
@@ -1553,6 +1599,7 @@
 
                         if (entry.isIntersecting) {
                             if (targets.length) {
+                                // Réinitialiser complètement avant de jouer
                                 targets.forEach(el => {
                                     const type = getType(el);
                                     if (type) resetElement(el, type);
@@ -1583,7 +1630,9 @@
                 sections.forEach(section => observer.observe(section));
             }
 
-       
+            // =============================================
+            // SCRAMBLE TEXT (boucle continue)
+            // =============================================
             function scrambleTextElement(element, text, duration, callback) {
                 const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@';
                 const originalText = text;
@@ -1636,6 +1685,9 @@
             footerScrambleEl.style.display = 'inline-block';
             startScrambleLoop(footerScrambleEl, footerText, 1600, 4500);
 
+            // =============================================
+            // PARTICLES
+            // =============================================
             const canvas = document.getElementById('particles-canvas');
             const ctx = canvas.getContext('2d');
             let particles = [];
@@ -1730,6 +1782,9 @@
             document.addEventListener('mouseleave', () => { mouseX = -9999;
                 mouseY = -9999; });
 
+            // =============================================
+            // NAVBAR, SCROLL, REVEAL...
+            // =============================================
             const navbar = document.getElementById('navbar');
             const scrollProgress = document.getElementById('scrollProgress');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -1771,6 +1826,7 @@
                 updateActiveSection();
                 checkReveals();
                 animateSkillBars();
+                // Lancer l'observateur après le chargement
                 setupSectionObserver();
             });
 
@@ -1800,6 +1856,7 @@
             }
             window.addEventListener('scroll', animateSkillBars);
 
+            // ===== NAVIGATION =====
             function navigateTo(sectionId) {
                 const section = document.getElementById(sectionId);
                 if (section) {
